@@ -3,7 +3,7 @@
 <?php include '../_scripts.html'; ?>
 <script src="../_extends.js"></script>
 <script src="../_authenticate.js"></script>
-<script src="../_stub.js"></script>
+<script src="../_stub.php"></script>
 <link href="../style.css" rel="stylesheet" type="text/css" />
 <script>
     $(function () {
@@ -71,8 +71,9 @@
             $.FusionGetTable(
                 $.Table.Key
                 , function (data) {
-                    //debugger; 
-                    $.Form.KO.Model.artFormTypes = $.AEDartforms();
+                    $.Form.KO.Model.AEDartforms = ko.observableArray( $.AEDartforms )
+                    $.Form.KO.Model.AEDprogramtypes = ko.observableArray( $.AEDprogramtypes )                
+                
                     $.Form.KOSetup(data, function () { $.Form.SetupSingle() })
                 }
             )
@@ -118,7 +119,7 @@
          </select> 
          <tr><th>   <label for="artFormType" class="control-label">Art Form Type</label>                                       </th><td>  <input class="form-control col-lg-6" data-bind='value: artFormType' />                       
          
-          <select class="form-control col-lg-6" data-bind="options: artFormTypes, selectedOptions: artFormType">
+          <select class="form-control col-lg-6" data-bind="options: $.Form.KO.Model.AEDartforms, selectedOptions: artFormType">
          </select> 
          
          </td></tr>

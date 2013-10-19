@@ -3,7 +3,7 @@
 <?php include '../_scripts.html'; ?>
 <script src="../_extends.js"></script>
 <script src="../_authenticate.js"></script>
-<script src="../stub.js"></script>
+<script src="../_stub.php"></script>
 <link href="../style.css" rel="stylesheet" type="text/css" />
 <script>
         $(function(){
@@ -18,7 +18,7 @@
             $.extend( 
                 $.Table
                 , {
-                    Key: '1GnUdMYtzBt6vXOZS777KIjesQ4eRZdQToEKaIag'
+                    Key: $.AEDtables.Donors
                     , Map: function( field ){
                         var map = {
                             firstName: "First Name"

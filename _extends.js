@@ -172,7 +172,7 @@ var jQuery = jQuery || {};
 
             var Model = function( items ) {
                 var self = this; 
-                debugger;
+                //debugger;
                 $.extend($.Form.KO.Model, self)
                 //debugger
                 $.Form.KO.Model.items = ko.observableArray(
