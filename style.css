@@ -25,3 +25,20 @@
     left: 10px;
     width:95%; 
 }
+.horizontalTbl{
+    width: 90%;
+
+    
+}
+.horizontalTbl th{
+    background-color: #2BA2E7;
+    border:solid;
+}
+.horizontalTbl tr{
+    border:solid;
+    
+}
+.horizontalTbl tr input[type="text"]{
+    width: 10%;
+    
+}

@@ -247,7 +247,7 @@ var jQuery = jQuery || {};
             sql += "(" 
             for(var item in row){
                 if(  map[item] != undefined )
-                    sql += "'" + map[item] + ",'"
+                    sql += "'" + map[item] + "',"
             }
             sql = sql.substring(0, sql.length -1 )
             sql += ")" 
@@ -270,7 +270,19 @@ var jQuery = jQuery || {};
         })  
         message += retval 
         return rowid 
-    };    
+    };
+    
+    $.FusionDeleteRow = function(table, row, message) {
+        var retval = 'empty'
+        var rowid = row.Id
+        var token = $.Hash["access_token"]
+        var tableLocation = 'https://www.googleapis.com/fusiontables/v1/query'
+            tableLocation += '?access_token=' + token
+            
+        var sql = "DELETE FROM " + table
+            sql += " WHERE ROWID = "
+            sql += rowid
+    }
     
     $.FusionGetTable = (function( table, callback ) { 
         var token = $.Hash["access_token"]

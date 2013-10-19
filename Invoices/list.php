@@ -86,12 +86,12 @@
         <a href=".">Item View</a> &nbsp; &nbsp; <a class="openInDrive" href="#">Open in Google Drive</a>
       <div  class='invoicesEditor Editor' >
       <fieldset class="col-lg-18 editgrid"  >     
-            <legend>Donor's List </legend>
+            <legend>Invoice's List </legend>
 
 
 
 
-            <table>
+            <table class='horizontalTbl'>
             <tr>          
                 <th>  id                                </th>         
                 <th>  Date                              </th>      
@@ -101,13 +101,13 @@
                 <th>  Artist Name                       </th>           
                 <th>  Program Name                      </th>          
                 <th>  Program Type                      </th>           
-                <th>  Art Form Type                     </th>     
+            <!--    <th>  Art Form Type                     </th>     
                 <th>  Total Cost of Event               </th> 
                 <th>  AED Payment                       </th>        
                 <th>  Payment Date                      </th> 
                 <th>  Number of Students Served         </th> 
                 <th>  Number of Teachers Attending      </th>        
-                <th>  Number of Parents                 </th> 
+                <th>  Number of Parents                 </th> -->
             </tr> 
             <tbody data-bind="foreach: { data:  $.Form.KO.Model.items }" class="Binder">
                 <tr>            
@@ -122,13 +122,13 @@
                     <td>  <input class="form-control col-lg-6" data-bind='value: artistName' />                        </td>
                     <td>  <input class="form-control col-lg-6" data-bind='value: programName' />                       </td>
                     <td>  <input class="form-control col-lg-6" data-bind='value: programType' />                         </td>
-                    <td>  <input class="form-control col-lg-6" data-bind='value: artFormType' />                 </td>
+                    <!-- <td>  <input class="form-control col-lg-6" data-bind='value: artFormType' />                 </td>
                     <td>  <input class="form-control col-lg-6" data-bind='value: totalCostofEvent' />             </td>
                     <td>  <input class="form-control col-lg-6" data-bind='value: aedPayment' />      </td>
                     <td>  <input class="form-control col-lg-6" data-bind='value: paymentDate' />        </td>
                     <td>  <input class="form-control col-lg-6" data-bind='value: numberOfStudentsServed' />             </td>
                     <td>  <input class="form-control col-lg-6" data-bind='value: numberOfTeachersAttending' />      </td>
-                    <td>  <input class="form-control col-lg-6" data-bind='value: numberOfParents' />        </td>
+                    <td>  <input class="form-control col-lg-6" data-bind='value: numberOfParents' />        </td> -->
                     <td>  <button data-bind='click: $root.removeItem'>Delete</button>                            </td>
                      
                 </tr>

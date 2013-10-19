@@ -25,15 +25,15 @@ var jQuery = jQuery || {};
                 } )              
         }
         , createWorkSheet: function(){
-            ssUrl = '_worksheet.php?token={0}&sheetkey={1}'.format($.Reports.token, $.Reports.ssid)
+            ssUrl = '_worksheet.php?token={0}&ssid={1}'.format($.Reports.token, $.Reports.ssid)
             return webContent = $.get(ssUrl )                         
         }
         , addSheetHeader: function(){
-            ssUrl = '_worksheetHeader.php?token={0}&sheetkey={1}&workkey={2}'.format($.Reports.token, $.Reports.ssid, $.Reports.wsid)
+            ssUrl = '_worksheetHeader.php?token={0}&ssid={1}&wsid={2}'.format($.Reports.token, $.Reports.ssid, $.Reports.wsid)
             return webContent = $.get(ssUrl )                         
         }        
         , addRows: function(){
-            ssUrl = '_worksheetRows.php?token={0}&sheetkey={1}&workkey={2}'.format($.Reports.token, $.Reports.ssid, $.Reports.wsid)
+            ssUrl = '_worksheetRows.php?token={0}&ssid={1}&wsid={2}'.format($.Reports.token, $.Reports.ssid, $.Reports.wsid)
             return webContent = $.get(ssUrl )                         
         }
         , List: function(){
@@ -47,13 +47,14 @@ var jQuery = jQuery || {};
                     var idstart = wsdata.indexOf("<id")
                     var idend  =  wsdata.indexOf( "</id>", idstart)
                     var idUri = wsdata.substring(idstart, idend).replace('<id>', '')
-                    var istart = idUri.indexOf('/worksheets/')
+                    var istart = idUri.indexOf('/full/')
                     var iend = idUri.indexOf('/private/')
-                    $.Reports.wsid = idUri.substring(istart, iend).replace("/worksheets/", '')
+                    $.Reports.wsid =  idUri.substring(istart, idUri.length).replace("/full/", '')
                     
                     console.log('Worksheet added', wsdata) 
                     $.Reports.addSheetHeader().done(function(headData){
                         console.log('header added', headData) 
+                    //debugger; 
                         $.Reports.addRows().done(function(rowdata){
                             console.log('rows added', rowdata) 
                             debugger; 

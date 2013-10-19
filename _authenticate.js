@@ -12,7 +12,7 @@ var jQuery = jQuery || {};
             console.log('retrieving token from google', window.location.href)
                 
             var href = 'https://accounts.google.com/o/oauth2/auth'
-            href += "?client_id=23165663826-6pta7osd3gp5dnhf5epkli8eo8f4nub0.apps.googleusercontent.com"
+            href += "?client_id=665230635444.apps.googleusercontent.com"
             //href += "&redirect_uri=http://artseveryday.gdirlam.c9.io/Donors/" + 
             href += "&redirect_uri=" + window.location.href
             href += "&response_type=token"

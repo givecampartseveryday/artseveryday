@@ -14,25 +14,25 @@
                         self.invoices = ko.observableArray(
                             ko.utils.arrayMap(
                                 invoices
-                                , function( donor ) {
+                                , function( invoice ) {
                                 return { 
-                                    firstName: donor["First Name"]
-                                    , lastName: donor["Last Name"]  
-                                    , preferredName: donor["Preferred Name"]  
-                                    , salutation: donor["Salutation"]  
+                                    firstName: invoice["First Name"]
+                                    , lastName: invoice["Last Name"]  
+                                    , preferredName: invoice["Preferred Name"]  
+                                    , salutation: invoice["Salutation"]  
                                 };
                         }));
                     //debugger; 
 
-                        self.addDonor = function() {
+                        self.addInvoice = function() {
                             self.invoices.push({
                                 firstName: ""
                                 , lastName: ""
                             });
                         };
                      
-                        self.removeDonor = function( donor ) {
-                            self.invoices.remove( donor );
+                        self.removeInvoice = function( invoice ) {
+                            self.invoices.remove( invoice );
                         };
                      
                         self.save = function() {
@@ -63,13 +63,13 @@
       <div data-bind="foreach: invoices">
       <fieldset class="col-lg-10">     
       <legend data-bind='html: preferredName'> </legend>
-      <button data-bind='click: $root.removeDonor'>Delete</button><br/>
+      <button data-bind='click: $root.removeInvoice'>Delete</button><br/>
       <label for="salutation" class="col-lg-2 control-label">salutation</label><input class="form-control col-lg-6" data-bind='value: salutation' /><br/>
       <label for="firstName" class="col-lg-2 control-label">First Name</label><input class="form-control col-lg-6" data-bind='value: firstName' /><br/>
       <label for="lastName" class="col-lg-2 control-label">Last Name</label><input class="form-control col-lg-6" data-bind='value: lastName' /><br/>
       <fieldset>
       </div>
-      <div><button data-bind='click: addDonor'>Add a contact</button></div>
+      <div><button data-bind='click: addInvoice'>Add a contact</button></div>
     </div>
     </div>
     </div>
