@@ -64,7 +64,33 @@
                 $.FusionGetTable( 
                     $.Table.Key
                     , function(data){ 
-                        $.Form.KOSetup(data, function(){$.Form.SetupSingle()}) 
+                    //debugger; 
+                        $.Form.KO.OnDataBind = function(){
+                            $('.vendorType').each(function(i, el){
+                            ////debugger; 
+                                $parent = $(el).parents('table')
+                                if( $(el).val() === 'ind' ){
+                                    $('.orgHide', $parent).hide()
+                                }else{
+                                    $('.orgHide', $parent).show()
+                                }
+                                $(el).change(function(e){
+                                    //alert('Event'); 
+                                    ////debugger; 
+                                    var ele = e.target;
+                                    $parent = $(ele).parents('table');
+                                    if( $(ele).val() === 'ind' ){
+                                        $('.orgHide', $parent).hide();
+                                    }else{
+                                        $('.orgHide', $parent).show();
+                                    }
+                                })
+                            })
+
+                            $.Form.SetupSingle(); 
+                        }
+                        ////debugger; 
+                        $.Form.KOSetup(data, $.Form.KO.OnDataBind ) 
                     } 
                 )
             });
@@ -90,12 +116,12 @@
 
 <table>
          <!-- <tr><th>   <label for="rowid" class="control-label">id</label>                                          </th><td>  <input class="form-control col-lg-6" data-bind='value: rowid' />                       </td></tr> -->
-         <tr><th>   <label for="vendorType" class="control-label">Vendor Type</label>                              </th><td>  <select class="form-control col-lg-6" data-bind='value: vendorType' />                   
+         <tr><th>   <label for="vendorType" class="control-label">Vendor Type</label>                              </th><td>  <select class="form-control col-lg-6 vendorType" data-bind='value: vendorType' />                   
                                                                                                                                     <option value="ind">Individual</option>
                                                                                                                                     <option value="org">Organization</option>
                                                                                                                                     <option value="gov">Governmental</option>
                                                                                                                                 </select>                                                                                   </td></tr>
-         <tr><th>   <label for="orgName" class="control-label">Organization Name?</label>                                </th><td>  <input class="form-control col-lg-6" data-bind='value: orgName' />                    </td></tr>
+         <tr class="orgHide"><th>   <label for="orgName" class="control-label">Organization Name?</label>                                </th><td>  <input class="form-control col-lg-6" data-bind='value: orgName' />                    </td></tr>
          <tr><th>   <label for="firstName" class="control-label">First Name</label>      </th><td>  <input class="form-control col-lg-6" data-bind='value: firstName' />        </td></tr>
          <tr><th>   <label for="lastName" class="control-label">Last Name</label>      </th><td>  <input class="form-control col-lg-6" data-bind='value: lastName' />        </td></tr>
          <tr><th>   <label for="title" class="control-label">Title</label>   </th><td>  <input class="form-control col-lg-6" data-bind='value: title' />      </td></tr>

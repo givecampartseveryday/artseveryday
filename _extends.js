@@ -40,18 +40,13 @@ var jQuery = jQuery || {};
                 $.Form.KO.AfterAddItem()
             }
             , removeItem: function(item){
+                console.log(item);
                 item.dirty = 'delete';
-                console.log('item is ', item);
-                console.log('Row has been marked as: ', item.dirty);
-                $.Form.KO.Model.items.remove( item );
-
-                
             }
+            
             , save: function() {
                 $.each($.Form.KO.Model.items(), function(i, el){
-                    console.log($.each($.Form.KO.Model.items()));
-                    console.log('Hello from save. el.dirty = ', el.dirty);
-                    
+
                     if( el.dirty.toString().toLowerCase() === 'updated' ){
                         console.log('item update', el)
                         $.FusionUpdateRow( $.Table.Key, el, $.Table.Map() )
@@ -59,13 +54,11 @@ var jQuery = jQuery || {};
                     
                     if( el.dirty.toString().toLowerCase() === 'new' ){
                         console.log('item insert', el)
-                        console.log('About to call FusionInsertRow')
                         $.FusionInsertRow( $.Table.Key, el, $.Table.Map() )
                     } 
                     
                     if( el.dirty.toString().toLowerCase() === 'delete' ){
                         console.log('item delete', el)
-                        console.log('About to call FusionDeleteRow')
                         $.FusionDeleteRow( $.Table.Key, el )
                     }
                 })
@@ -179,6 +172,7 @@ var jQuery = jQuery || {};
 
             var Model = function( items ) {
                 var self = this; 
+                debugger;
                 $.extend($.Form.KO.Model, self)
                 //debugger
                 $.Form.KO.Model.items = ko.observableArray(
@@ -295,24 +289,21 @@ var jQuery = jQuery || {};
         var tableLocation = 'https://www.googleapis.com/fusiontables/v1/query'
             tableLocation += '?access_token=' + token
             
-        var sql = "DELETE FROM " + table
-            sql += " WHERE ROWID = "
-            sql += rowid
+        var sql = "DELETE FROM " + table;
+            sql += " WHERE ROWID = ";
+            sql += ("'" + rowid + "'");
             
-        console.log("sql = " + sql);
-        
-        var url = tableLocation + "&sql" + sql   
+        var url = tableLocation + "&sql=" + sql   
 
         var xhr = $.post(url).done(function(response) {
             rowid = ''
             debugger;
-            retval = "DATA deleted \n \n" + JSON.stringify(response)
+            retval = "DATA deleted \n \n" + JSON.stringify(response);
         }).fail(function(response) {
-            retval = "FAILED \n \n" + JSON.stringify(response)
+            retval = "FAILED \n \n" + JSON.stringify(response);
         })
         
-        message += retval
-        return rowid
+        return rowid;
     }
     
     $.FusionGetTable = (function( table, callback ) { 

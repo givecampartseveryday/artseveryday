@@ -3,13 +3,16 @@ date_default_timezone_set('America/New_York');
 // http://sim.plified.com/2008/09/14/accessing-google-spreadsheet-with-php/
 $token = $_REQUEST["token"];
 $ssid = $_REQUEST["ssid"];
+$rows = $_REQUEST["rows"];
+$cols = $_REQUEST["cols"];
+
 
 $url = "https://spreadsheets.google.com/feeds/worksheets/{$ssid}/private/full/?access_token=" . $token;
 
     $xml ='<entry xmlns="http://www.w3.org/2005/Atom" xmlns:gs="http://schemas.google.com/spreadsheets/2006"  xmlns:gd="http://schemas.google.com/g/2005" >';
     $xml .='<title>Red Team</title>';
-    $xml .='<gs:rowCount>2</gs:rowCount>';
-    $xml .='<gs:colCount>1</gs:colCount>';
+    $xml .='<gs:rowCount>' . $rows . '</gs:rowCount>';
+    $xml .='<gs:colCount>' . $cols .'</gs:colCount>';
     $xml .='</entry>';
 
 $ch = curl_init();

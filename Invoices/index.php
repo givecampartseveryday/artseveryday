@@ -3,7 +3,7 @@
 <?php include '../_scripts.html'; ?>
 <script src="../_extends.js"></script>
 <script src="../_authenticate.js"></script>
-<script src="../_tables.js"></script>
+<script src="../_stub.js"></script>
 <link href="../style.css" rel="stylesheet" type="text/css" />
 <script>
     $(function () {
@@ -71,9 +71,8 @@
             $.FusionGetTable(
                 $.Table.Key
                 , function (data) {
-                var vednorTable = ko.observableArray(['France', 'Germany', 'Spain'])
-                    $.Form.KO.Model.Vendors = vednorTable
-                    
+                    //debugger; 
+                    $.Form.KO.Model.artFormTypes = $.AEDartforms();
                     $.Form.KOSetup(data, function () { $.Form.SetupSingle() })
                 }
             )
@@ -104,12 +103,25 @@
          <tr><th>   <label for="schoolName" class="control-label">School Name</label>                       </th><td>  <input class="form-control col-lg-6" data-bind='value: schoolName' />                </td></tr>
          <tr><th>   <label for="invoiceNumber" class="control-label">Invoice Number</label>                                </th><td>  <input class="form-control col-lg-6" data-bind='value: invoiceNumber' />                    </td></tr>
          <tr><th>   <label for="vendorName" class="control-label">Vendor Name</label>                       </th><td>  <input class="form-control col-lg-6" data-bind='value: vendorName' />                
-         <select data-bind="options: Vendors"></select>        
+         <!-- <select data-bind="options: Vendors"></select>        -->
          </td></tr>
          <tr><th>   <label for="artistName" class="control-label">Artist Name</label>                       </th><td>  <input class="form-control col-lg-6" data-bind='value: artistName' />                </td></tr>
          <tr><th>   <label for="programName" class="control-label">Program Name</label>                                         </th><td>  <input class="form-control col-lg-6" data-bind='value: programName' />                        </td></tr>
-         <tr><th>   <label for="programType" class="control-label">Program Type</label>                                           </th><td><select   <input type= class="form-control col-lg-6" data-bind='value: programType' />                         </td></tr>
-         <tr><th>   <label for="artFormType" class="control-label">Art Form Type</label>                                       </th><td>  <input class="form-control col-lg-6" data-bind='value: artFormType' />                       </td></tr>
+         <tr><th>   <label for="programType" class="control-label">Program Type</label>                                           </th><td>  <input class="form-control col-lg-6" data-bind='value: programType' />
+          <select class="form-control col-lg-6" data-bind="options: programType">
+            <option value="ft">Field Trip</option>
+            <option value="osp">Out of School Performance</option>
+            <option value="trp">Transportation</option>
+            <option value="res">Residency</option>
+            <option value="isp">In-School performance</option>
+            <option value="isw">In-school Workshop</option>
+         </select> 
+         <tr><th>   <label for="artFormType" class="control-label">Art Form Type</label>                                       </th><td>  <input class="form-control col-lg-6" data-bind='value: artFormType' />                       
+         
+          <select class="form-control col-lg-6" data-bind="options: artFormTypes, selectedOptions: artFormType">
+         </select> 
+         
+         </td></tr>
          <tr><th>   <label for="totalCostofEvent" class="control-label">Total Cost of Event</label>                          </th><td>  <input class="form-control col-lg-6" data-bind='value: totalCostofEvent' />                 </td></tr>
          <tr><th>   <label for="aedPayment" class="control-label">AED Payment</label>                 </th><td>  <input class="form-control col-lg-6" data-bind='value: aedPayment' />             </td></tr>
          <tr><th>   <label for="paymentDate" class="control-label">Payment Date</label>   </th><td>  <input class="form-control col-lg-6" data-bind='value: paymentDate' />      </td></tr>

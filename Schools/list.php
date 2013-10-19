@@ -84,7 +84,7 @@
 
     <div class="container">
 
-      <h1>Donors</h1>
+      <h1>Schools</h1>
 <div id='SchoolsList' class='col-lg-20'>
         <a href=".">Item View</a> &nbsp; &nbsp; <a class="openInDrive" href="#">Open in Google Drive</a>
       <div  class='SchoolsEditor Editor' >
@@ -103,8 +103,7 @@
                 <th>  Student Enrollment                    </th>    
                 <th>  Title 1?                    </th>  
                 <th>  Targeted Assistance?                              </th>           
-                <th>  FARMS Rate                             </th>          
-                <th>  School Code                               </th>           
+                <th>  FARMS Rate                             </th>           
                 <th>  Street Address Line 1                      </th>     
                 <th>  Street Address Line 2                 </th> 
                 <th>  City          </th>        
@@ -123,13 +122,12 @@
                         <input type="text" class="dirty" data-bind='value: dirty' />
                     </td>
                     <td>  <input class="form-control col-lg-6" data-bind='value: schoolname' />                   </td>
-                    <td>  <input class="form-control col-lg-6" data-bind='value: schoolnum' />                    </td>
+                    <td>  <input class="form-control col-lg-6" data-bind='value: schoolCode' />                    </td>
                     <td>  <input class="form-control col-lg-6" data-bind='value: integrationCoach' />                </td>
                     <td>  <input class="form-control col-lg-6" data-bind='value: enrollment' />                </td>
                     <td>  <input class="form-control col-lg-6" data-bind='value: title1' />                        </td>
                     <td>  <input type="checkbox" class="form-control col-lg-6" data-bind='value: targetedAssistance' />                       </td>
-                    <td>  <input class="form-control col-lg-6" data-bind='value: farmsRate' />                         </td>
-                    <td>  <input class="form-control col-lg-6" data-bind='value: schoolCode' />                 </td>
+                    <td>  <input type="checkbox" class="form-control col-lg-6" data-bind='value: farmsRate' />                         </td>
                     <td>  <input class="form-control col-lg-6" data-bind='value: streetLine1' />             </td>
                     <td>  <input class="form-control col-lg-6" data-bind='value: streetLine2' />      </td>
                     <td>  <input class="form-control col-lg-6" data-bind='value: city' />        </td>
@@ -137,7 +135,6 @@
                     <td>  <input class="form-control col-lg-6" data-bind='value: zip' /> </td>
                     <td>  <input class="form-control col-lg-6" data-bind='value: phone' /> </td>
                     <td>  <input class="form-control col-lg-6" data-bind='value: gradeRanges' /> </td>
-                    <td>  <input class="form-control col-lg-6" data-bind='value: numberOfStudents' /> </td>
                     <td>  <input class="form-control col-lg-6" data-bind='value: numberOfTeachers' /> </td>
                     <td>  <input class="form-control col-lg-6" data-bind='value: numberOfArtTeachersFullTime' /> </td>
                     <td>  <input class="form-control col-lg-6" data-bind='value: yearJoined' /> </td>

@@ -3,6 +3,7 @@
 <?php include '../_scripts.html'; ?>
 <script src="../_extends.js"></script>
 <script src="../_authenticate.js"></script>
+<script src="../stub.js"></script>
 <link href="../style.css" rel="stylesheet" type="text/css" />
 <script>
         $(function(){
@@ -17,34 +18,38 @@
             $.extend( 
                 $.Table
                 , {
-                    Key: '19RuwwJStqOBbPigLx--Lv3m6JpYvgbb7wj3AEV4'
+                    Key: '1GnUdMYtzBt6vXOZS777KIjesQ4eRZdQToEKaIag'
                     , Map: function( field ){
                         var map = {
                             firstName: "First Name"
                             , "First Name": "firstName"
                             , lastName: "Last Name"  
-                            , "Last Name": "lastName"  
-                            , addressLine1: "Address Line 1"
-                            , "Address Line 1": "addressLine1"
-                            , addressLine2: "Address Line 2" 
-                            , "Address Line 2": "addressLine2" 
+                            , "Last Name": "lastName"
+                            , preferredName: "Preferred Name"
+                            , "Preferred Name": "preferredName"
+                            , title: "Title"
+                            , "Title": "title"
+                            , addressLine1: "Street Address Line 1"
+                            , "Street Address Line 1": "addressLine1"
+                            , addressLine2: "Street Address Line 2" 
+                            , "Street Address Line 2": "addressLine2" 
                             , city: "City"
                             , "City": "city"
                             , state: "State" 
                             , "State": "state"
-                            , zip: "Zip"
-                            , "Zip": "zip"
+                            , zip: "ZIP"
+                            , "ZIP": "ZIP"
+                            , emailAdress: "Email"
+                            , "Email": "emailAdress"
                             , contactType: "Contact Type"
                             , "Contact Type": "contactType"
                             , boardMemberName: "Board Member Name"
                             , "Board Member Name": "boardMemberName"
                             , donationAmountReceived: "Donation Amount Received"
                             , "Donation Amount Received": "donationAmountReceived"
-                            , boardAnnualTaxCredit: "Board Annual Tax Credit"
-                            , "Board Annual Tax Credit": "boardAnnualTaxCredit"
                         }
                         if( field ){
-                            return map[field] || field; 
+                            return map[field] || field;
                         }
                         return map; 
                     }
@@ -79,24 +84,25 @@
       <fieldset class="col-lg-10 editgrid" data-bind=" attr: {'id': 'fieldset_' + rowid}" style="display:none">     
             <legend data-bind='html: lastName'> </legend>
 
-            <button data-bind='click: $root.removeItem'>Delete</button><br/>
+        <button data-bind='click: $root.removeItem'>Delete</button><br/>
 
-<table>
-         <tr><th>   <label for="rowid" class="control-label">id</label>                                          </th><td>  <input class="form-control col-lg-6" data-bind='value: rowid' />                       </td></tr>
-         <tr><th>   <label for="firstName" class="control-label">First Name</label>                              </th><td>  <input class="form-control col-lg-6" data-bind='value: firstName' />                   </td></tr>
-         <tr><th>   <label for="lastName" class="control-label">Last Name</label>                                </th><td>  <input class="form-control col-lg-6" data-bind='value: lastName' />                    </td></tr>
-         <tr><th>   <label for="addressLine1" class="control-label">Address Line 1</label>                       </th><td>  <input class="form-control col-lg-6" data-bind='value: addressLine1' />                </td></tr>
-         <tr><th>   <label for="addressLine2" class="control-label">Address Line 2</label>                       </th><td>  <input class="form-control col-lg-6" data-bind='value: addressLine2' />                </td></tr>
-         <tr><th>   <label for="city" class="control-label">City</label>                                         </th><td>  <input class="form-control col-lg-6" data-bind='value: city' />                        </td></tr>
-         <tr><th>   <label for="state" class="control-label">State</label>                                       </th><td>  <input class="form-control col-lg-6" data-bind='value: state' />                       </td></tr>
-         <tr><th>   <label for="zip" class="control-label">Zip</label>                                           </th><td>  <input class="form-control col-lg-6" data-bind='value: zip' />                         </td></tr>
-         <tr><th>   <label for="contactType" class="control-label">Contact Type</label>                          </th><td>  <input class="form-control col-lg-6" data-bind='value: contactType' />                 </td></tr>
-         <tr><th>   <label for="boardMemberName" class="control-label">Board Member Name</label>                 </th><td>  <input class="form-control col-lg-6" data-bind='value: boardMemberName' />             </td></tr>
-         <tr><th>   <label for="donationAmountReceived" class="control-label">Donation Amount Received</label>   </th><td>  <input class="form-control col-lg-6" data-bind='value: donationAmountReceived' />      </td></tr>
-         <tr><th>   <label for="boardAnnualTaxCredit" class="control-label">Board Annual Tax Credit</label>      </th><td>  <input class="form-control col-lg-6" data-bind='value: boardAnnualTaxCredit' />        </td></tr>
-</table>
+        <table>
+             <tr><th>   <label for="rowid" class="control-label">id</label>                                          </th><td>  <input class="form-control col-lg-6" data-bind='value: rowid' />                       </td></tr>
+             <tr><th>   <label for="firstName" class="control-label">First Name</label>                              </th><td>  <input class="form-control col-lg-6" data-bind='value: firstName' />                   </td></tr>
+             <tr><th>   <label for="lastName" class="control-label">Last Name</label>                                </th><td>  <input class="form-control col-lg-6" data-bind='value: lastName' />                    </td></tr>
+             <tr><th>   <label for="preferredName" class="control-label">Preferred Name</label>                      </th><td>  <input class="form-control col-lg-6" data-bind='value: preferredName' />               </td></tr>
+             <tr><th>   <label for="title" class="control-label">Title</label>                                       </th><td>  <input class="form-control col-lg-6" data-bind='value: title' />                       </td></tr>
+             <tr><th>   <label for="addressLine1" class="control-label">Address Line 1</label>                       </th><td>  <input class="form-control col-lg-6" data-bind='value: addressLine1' />                </td></tr>
+             <tr><th>   <label for="addressLine2" class="control-label">Address Line 2</label>                       </th><td>  <input class="form-control col-lg-6" data-bind='value: addressLine2' />                </td></tr>
+             <tr><th>   <label for="city" class="control-label">City</label>                                         </th><td>  <input class="form-control col-lg-6" data-bind='value: city' />                        </td></tr>
+             <tr><th>   <label for="state" class="control-label">State</label>                                       </th><td>  <input class="form-control col-lg-6" data-bind='value: state' />                       </td></tr>
+             <tr><th>   <label for="ZIP" class="control-label">Zip</label>                                           </th><td>  <input class="form-control col-lg-6" data-bind='value: ZIP' />                         </td></tr>
+             <tr><th>   <label for="emailAddress" class="control-label">Email Address</label>                       </th><td>  <input class="form-control col-lg-6" data-bind='value: emailAdress' />                  </td></tr>
+             <tr><th>   <label for="donorType" class="control-label">Contact Type</label>                          </th><td>  <input class="form-control col-lg-6" data-bind='value: donorType' />                     </td></tr>
+             <tr><th>   <label for="areBoardMember" class="control-label">Board Member?</label>                 </th><td>  <input class="form-control col-lg-6" data-bind='value: areBoardMember' />                   </td></tr>
+             <tr><th>   <label for="donationAmountReceived" class="control-label">Donation Amount Received</label>   </th><td>  <input class="form-control col-lg-6" data-bind='value: donationAmountReceived' />      </td></tr>
+      </table>
 
-            <input type="text" class="dirty" data-bind='value: dirty' />
       </fieldset>
 
       </div><!-- donorsEditor databinder -->
