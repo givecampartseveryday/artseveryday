@@ -50,8 +50,8 @@ var jQuery = jQuery || {};
                     console.log('Worksheet added', wsdata) 
                     $.Reports.addRows().done(function(rowdata){
                         console.log('rows added', rowdata) 
+                        debugger; 
                     })
-                    debugger; 
                  })
             })
 

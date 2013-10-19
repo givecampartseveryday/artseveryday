@@ -6,7 +6,7 @@
 <script>
         $(function(){
             $.Auth(function(){ 
-                 $.FusionGetTable('19RuwwJStqOBbPigLx--Lv3m6JpYvgbb7wj3AEV4', function(data){
+                 $.FusionGetTable('1NK0EXbnAI5kRC2pY-cqT76660fxlAwUiHXH2Hgc', function(data){
                     console.clear()
                     console.log('Start Knockout with', data)
                     var InvoicesModel = function( invoices ) {
