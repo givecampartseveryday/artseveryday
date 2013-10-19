@@ -9,11 +9,11 @@
                  $.FusionGetTable('19RuwwJStqOBbPigLx--Lv3m6JpYvgbb7wj3AEV4', function(data){
                     console.clear()
                     console.log('Start Knockout with', data)
-                    var DonorsModel = function( donors ) {
+                    var InvoicesModel = function( invoices ) {
                         var self = this;
-                        self.donors = ko.observableArray(
+                        self.invoices = ko.observableArray(
                             ko.utils.arrayMap(
-                                donors
+                                invoices
                                 , function( donor ) {
                                 return { 
                                     firstName: donor["First Name"]
@@ -25,25 +25,25 @@
                     //debugger; 
 
                         self.addDonor = function() {
-                            self.donors.push({
+                            self.invoices.push({
                                 firstName: ""
                                 , lastName: ""
                             });
                         };
                      
                         self.removeDonor = function( donor ) {
-                            self.donors.remove( donor );
+                            self.invoices.remove( donor );
                         };
                      
                         self.save = function() {
-                            self.lastSavedJson(JSON.stringify(ko.toJS(self.donors), null, 2));
+                            self.lastSavedJson(JSON.stringify(ko.toJS(self.invoices), null, 2));
                         };
                      
                         self.lastSavedJson = ko.observable("")
                     };
                      
                     ko.applyBindings(
-                        new DonorsModel(data)
+                        new InvoicesModel(data)
                     );                    
                     
                  })
@@ -57,10 +57,10 @@
 
     <div class="container">
 
-      <h1>Donors</h1>
-<div id='DonorsList' class='col-lg-12'>
-    <div class='donorsEditor well'>
-      <div data-bind="foreach: donors">
+      <h1>Invoices</h1>
+<div id='InvoicesList' class='col-lg-12'>
+    <div class='invoicesEditor well'>
+      <div data-bind="foreach: invoices">
       <fieldset class="col-lg-10">     
       <legend data-bind='html: preferredName'> </legend>
       <button data-bind='click: $root.removeDonor'>Delete</button><br/>

@@ -87,7 +87,7 @@
 
       <div  class='invoicesEditor Editor Binder' data-bind="foreach: { data:  $.Form.KO.Model.items }">
       <fieldset class="col-lg-10 editgrid" data-bind=" attr: {'id': 'fieldset_' + rowid}" style="display:none">     
-            <legend data-bind='html: lastName'> </legend>
+            <legend data-bind='html: invoiceNumber'> </legend>
 
             <button data-bind='click: $root.removeItem'>Delete</button><br/>
 
