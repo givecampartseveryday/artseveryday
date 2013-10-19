@@ -53,6 +53,8 @@ var jQuery = jQuery || {};
                 $.Reports.ssid = ssdata.id
                 console.log('Spreadsheet added', ssdata) 
                 $.Reports.createWorkSheet().done(function(wsdata){
+                    var idstart = wsdata.indexOf("<id")
+                    var idend  =  wsdata.indexOf( "</id>", idstart)
                     console.log('Worksheet added', wsdata) 
                     debugger; 
                  })

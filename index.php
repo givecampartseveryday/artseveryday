@@ -14,7 +14,7 @@ $(function(){
          var token = $.Hash.access_token
          $( '.token' ).text( token )
          //debugger; 
-         $.Reports.List()
+         //$.Reports.List()
     })
 })
 </script>
