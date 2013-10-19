@@ -5,24 +5,7 @@ var jQuery = jQuery || {};
 
     
 ( function($) {
-	    if (! String.prototype.format ) 
-	        String.prototype.format = function(){
-	            var txt = this;
-	            for ( var i = 0; i < arguments.length; i++ ) {
-	                var exp = new RegExp( '\\{' + (i) + '\\}', 'gm' )
-	                txt = txt.replace(exp, arguments[i])
-	            }
-	            return txt   
-	        };
 
-	    if (! String.format ) 
-	        String.format = function(){
-	        for( var i = 1; i < arguments.length; i++ ) {
-	            var exp = new RegExp( '\\{' + (i - 1) + '\\}', 'gm' )
-	            arguments[0] = arguments[0].replace( exp, arguments[i] )
-	        }
-	        return arguments[0]
-	        };
 
 //    debugger; 
     $.Reports = {
@@ -45,6 +28,10 @@ var jQuery = jQuery || {};
             ssUrl = '_worksheet.php?token={0}&sheetkey={1}'.format($.Reports.token, $.Reports.ssid)
             return webContent = $.get(ssUrl )                         
         }
+        , addRows: function(){
+            ssUrl = '_worksheetRows.php?token={0}&sheetkey={1}&workkey={2}'.format($.Reports.token, $.Reports.ssid, $.Reports.wsid)
+            return webContent = $.get(ssUrl )                         
+        }        
         , List: function(){
             $.Reports.token = $.Hash["access_token"]
             var token = $.Reports.token
@@ -55,7 +42,15 @@ var jQuery = jQuery || {};
                 $.Reports.createWorkSheet().done(function(wsdata){
                     var idstart = wsdata.indexOf("<id")
                     var idend  =  wsdata.indexOf( "</id>", idstart)
+                    var idUri = wsdata.substring(idstart, idend).replace('<id>', '')
+                    var istart = idUri.indexOf('/worksheets/')
+                    var iend = idUri.indexOf('/private/')
+                    $.Reports.wsid = idUri.substring(istart, iend).replace("/worksheets/", '')
+                    
                     console.log('Worksheet added', wsdata) 
+                    $.Reports.addRows().done(function(rowdata){
+                        console.log('rows added', rowdata) 
+                    })
                     debugger; 
                  })
             })

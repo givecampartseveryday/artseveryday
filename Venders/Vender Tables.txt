@@ -1,0 +1,60 @@
+org		name or no
+web		url or no
+address		1, 2, city, state, zip
+art
+w9
+anygive		y/n
+exec	name (f, l) phone (h, w, m) email
+edu	...
+sched	…
+contact1, 2, 3	…
+
+-----><-----
+
+rowid
+org
+web
+addressLine1
+addressLine2
+city
+state
+zip
+art
+w9
+anyGive
+execFName
+execLName
+execHPhone
+execWPhone
+execMPhone
+execEmail
+eduFName
+eduLName
+eduHPhone
+eduWPhone
+eduMPhone
+eduEmail
+schedFName
+schedLName
+schedHPhone
+schedWPhone
+schedMPhone
+schedEmail
+contact1FName
+contact1LName
+contact1HPhone
+contact1WPhone
+contact1MPhone
+contact1Email
+contact2FName
+contact2LName
+contact2HPhone
+contact2WPhone
+contact2MPhone
+contact2Email
+contact3FName
+contact3LName
+contact3HPhone
+contact3WPhone
+contact3MPhone
+contact3Email
