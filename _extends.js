@@ -40,17 +40,33 @@ var jQuery = jQuery || {};
                 $.Form.KO.AfterAddItem()
             }
             , removeItem: function(item){
+                item.dirty = 'delete';
+                console.log('item is ', item);
+                console.log('Row has been marked as: ', item.dirty);
                 $.Form.KO.Model.items.remove( item );
+
+                
             }
             , save: function() {
                 $.each($.Form.KO.Model.items(), function(i, el){
+                    console.log($.each($.Form.KO.Model.items()));
+                    console.log('Hello from save. el.dirty = ', el.dirty);
+                    
                     if( el.dirty.toString().toLowerCase() === 'updated' ){
                         console.log('item update', el)
                         $.FusionUpdateRow( $.Table.Key, el, $.Table.Map() )
                     }
+                    
                     if( el.dirty.toString().toLowerCase() === 'new' ){
                         console.log('item insert', el)
+                        console.log('About to call FusionInsertRow')
                         $.FusionInsertRow( $.Table.Key, el, $.Table.Map() )
+                    } 
+                    
+                    if( el.dirty.toString().toLowerCase() === 'delete' ){
+                        console.log('item delete', el)
+                        console.log('About to call FusionDeleteRow')
+                        $.FusionDeleteRow( $.Table.Key, el )
                     }
                 })
                 $('.dirty').val( false )
@@ -112,7 +128,7 @@ var jQuery = jQuery || {};
                    return void(0); 
                 }
                 var retAlert = 'You have unsaved changes on this page, '
-                retAlert += 'are you sure you want to continue and loose your changes.'
+                retAlert += 'are you sure you want to continue and lose your changes.'
                 return retAlert;
             };
             
@@ -258,7 +274,7 @@ var jQuery = jQuery || {};
                     sql += "'" + row[item] + "',"
             }            
             sql = sql.substring(0, sql.length -1 )
-            sql += ")" 
+            sql += ")"
 
         var url = tableLocation + '&sql=' + sql
         var xhr = $.post( url ).done(function(response){
@@ -272,9 +288,9 @@ var jQuery = jQuery || {};
         return rowid 
     };
     
-    $.FusionDeleteRow = function(table, row, message) {
+    $.FusionDeleteRow = function(table, row) {
         var retval = 'empty'
-        var rowid = row.Id
+        var rowid = row["rowid"]
         var token = $.Hash["access_token"]
         var tableLocation = 'https://www.googleapis.com/fusiontables/v1/query'
             tableLocation += '?access_token=' + token
@@ -282,6 +298,21 @@ var jQuery = jQuery || {};
         var sql = "DELETE FROM " + table
             sql += " WHERE ROWID = "
             sql += rowid
+            
+        console.log("sql = " + sql);
+        
+        var url = tableLocation + "&sql" + sql   
+
+        var xhr = $.post(url).done(function(response) {
+            rowid = ''
+            debugger;
+            retval = "DATA deleted \n \n" + JSON.stringify(response)
+        }).fail(function(response) {
+            retval = "FAILED \n \n" + JSON.stringify(response)
+        })
+        
+        message += retval
+        return rowid
     }
     
     $.FusionGetTable = (function( table, callback ) { 
