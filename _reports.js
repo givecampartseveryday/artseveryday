@@ -28,10 +28,14 @@ var jQuery = jQuery || {};
             ssUrl = '_worksheet.php?token={0}&sheetkey={1}'.format($.Reports.token, $.Reports.ssid)
             return webContent = $.get(ssUrl )                         
         }
+        , addSheetHeader: function(){
+            ssUrl = '_worksheetHeader.php?token={0}&sheetkey={1}&workkey={2}'.format($.Reports.token, $.Reports.ssid, $.Reports.wsid)
+            return webContent = $.get(ssUrl )                         
+        }        
         , addRows: function(){
             ssUrl = '_worksheetRows.php?token={0}&sheetkey={1}&workkey={2}'.format($.Reports.token, $.Reports.ssid, $.Reports.wsid)
             return webContent = $.get(ssUrl )                         
-        }        
+        }
         , List: function(){
             $.Reports.token = $.Hash["access_token"]
             var token = $.Reports.token
@@ -48,9 +52,12 @@ var jQuery = jQuery || {};
                     $.Reports.wsid = idUri.substring(istart, iend).replace("/worksheets/", '')
                     
                     console.log('Worksheet added', wsdata) 
-                    $.Reports.addRows().done(function(rowdata){
-                        console.log('rows added', rowdata) 
-                        debugger; 
+                    $.Reports.addSheetHeader().done(function(headData){
+                        console.log('header added', headData) 
+                        $.Reports.addRows().done(function(rowdata){
+                            console.log('rows added', rowdata) 
+                            debugger; 
+                        })
                     })
                  })
             })
