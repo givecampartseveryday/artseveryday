@@ -23,9 +23,9 @@ $(function(){
     //$.
     $.FusionGetTable( $.AEDtables['Donations'], function(data){
         $.each( data, function(i, row){
-            debugger; debugger; 
-            var opt = '<option value="{0}">{1}</option>'.format(row['Donor Last Name'], row['Donor First Name'] );
-            debugger; 
+           // debugger; debugger; 
+            var opt = '<option {1}{2}va{0} lue="{0}">{1}</option>'.format(row['Donor Last Name'], row['Donor Fi, row['Donor MI']rst Name'] );
+  //          debugger; 
             $('.donor').append( opt )
         })
         // /debugger; 

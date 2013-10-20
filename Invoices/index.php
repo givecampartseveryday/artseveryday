@@ -41,12 +41,14 @@
     var xhr = $.get(url, 
         function(response) {
             for (var i in response.rows) {
+                console.log(response.rows[i])
                 $("#schoolSelect").append("<option>"+response.rows[i]+"</option>");
+                $("#schoolSelect2").append("<option>"+response.rows[i]+"</option>");
             }
         }
     );
 
-/*    
+    
     url = "https://www.googleapis.com/fusiontables/v1/query";
     token = $.Hash["access_token"];
     url += "?access_token=" + token;
@@ -70,10 +72,10 @@
         }
         }
     ) 
-*/
-});
+
+//});
     
-/*    
+    
         url = "https://www.googleapis.com/fusiontables/v1/query";
         token = $.Hash["access_token"];
         url += "?access_token=" + token;
@@ -99,7 +101,7 @@
         }
         )
     });
-*/    
+    
 
 
     $('#btn_search').click(function () {
@@ -199,7 +201,7 @@
                 }
             )
         });
-    });
+    //});
 
 </script>
     
@@ -332,7 +334,7 @@
         <div id=bySchool>
             <form id=generateReportBySchool>
             <table>
-                <tr><th>    <label>By School</label> </th><td> <select name=school id=schoolSelect></select> </td></tr>
+                <tr><th>    <label>By School</label> </th><td> <select name=school id=schoolSelect2></select> </td></tr>
                 <tr><td><label>Start Date</label> <input name=start placeholder="MM/DD/YYYY" /></td>  <td><label>End Date</label> <input name=end placeholder="MM/DD/YYYY" /></td></tr>
             </table>
             
