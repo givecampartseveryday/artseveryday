@@ -318,6 +318,7 @@ var jQuery = jQuery || {};
     };
     
     $.FusionDeleteRow = function(table, row) {
+        debugger;
         var retval = 'empty'
         var rowid = row["rowid"]
         var token = $.Hash["access_token"]
@@ -327,7 +328,8 @@ var jQuery = jQuery || {};
         var sql = "DELETE FROM " + table;
             sql += " WHERE ROWID = ";
             sql += ("'" + rowid + "'");
-            
+        debugger;
+        
         var url = tableLocation + "&sql=" + sql   
 
         var xhr = $.post(url).done(function(response) {

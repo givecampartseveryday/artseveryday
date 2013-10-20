@@ -3,6 +3,7 @@
 <?php include '../_scripts.html'; ?>
 <script src="../_extends.js"></script>
 <script src="../_authenticate.js"></script>
+<script src="../_stub.php"></script>
 <link href="../style.css" rel="stylesheet" type="text/css" />
 <script>
         $(function(){
@@ -17,7 +18,7 @@
             $.extend( 
                 $.Table
                 , {
-                    Key: '1frTYm1_6TH3sv3byQ0nx_GD1gUWBQ5W1VTWspd0'
+                    Key: $.AEDtables['Vendors']
                     , Map: function( field ){
                         var map = {
                             vendorType: "Vendor Type"
@@ -79,7 +80,7 @@
 
       <h1>Vendors</h1>
 <div id='VendorsList' class='col-lg-20'>
-        <a href=".">Item View</a> &nbsp; &nbsp; <a class="openInDrive" href="#">Open in Google Drive</a>
+        <a href="index.php">Item View</a> &nbsp; &nbsp; <a class="openInDrive" href="#">Open in Google Drive</a>
       <div  class='vendorsEditor Editor' >
       <fieldset class="col-lg-18 editgrid"  >     
             <legend>Vendor's List </legend>

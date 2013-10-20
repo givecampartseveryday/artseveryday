@@ -108,14 +108,20 @@
              <tr><th>   <label for="state" class="control-label">State</label>                                       </th><td>  <input class="form-control col-lg-6" data-bind='value: state' />                       </td></tr>
              <tr><th>   <label for="zip" class="control-label">Zip</label>                                           </th><td>  <input class="form-control col-lg-6" data-bind='value: zip' />                         </td></tr>
              <tr><th>   <label for="emailAddress" class="control-label">Email Address</label>                       </th><td>  <input class="form-control col-lg-6" data-bind='value: emailAdress' />                  </td></tr>
-             <tr><th>   <label for="donorType" class="control-label">Donor Type</label>                          </th><td>  <input class="form-control col-lg-6" data-bind='value: donorType' />                     </td></tr>
-             <tr><th>   <label for="areBoardMember" class="control-label">Board Member?</label>                 </th><td>  <input class="form-control col-lg-6" data-bind='value: areBoardMember' />                   </td></tr>
+             <tr><th>   <label for="donorType" class="control-label">Donor Type</label>                          </th><td>  <select class="form-control col-lg-6" data-bind='value: donorType' />                   
+                                                                                                                                    <option value="ind">Individual</option>
+                                                                                                                                    <option value="org">Foundation</option>
+                                                                                                                                    <option value="gov">Government</option>
+                                                                                                                            </select>                                                                                                                                                 </td></tr>
+             <tr><th>   <label for="areBoardMember" class="control-label">Board Member?</label>                 </th><td>  <input type="checkbox" class="form-control col-lg-6" data-bind='value: areBoardMember' />                   </td></tr>
              <tr><th>   <label for="orgName" class="control-label">Organization Name</label>   </th><td>  <input class="form-control col-lg-6" data-bind='value: orgName' />      </td></tr>
              <tr><th>   <label for="hPhone" class="control-label">Home Phone</label>   </th><td>  <input class="form-control col-lg-6" data-bind='value: hPhone' />      </td></tr>
              <tr><th>   <label for="cPhone" class="control-label">Cell Phone</label>   </th><td>  <input class="form-control col-lg-6" data-bind='value: cPhone' />      </td></tr>
              <tr><th>   <label for="POCfirstName" class="control-label">POC First Name</label>   </th><td>  <input class="form-control col-lg-6" data-bind='value: POCfirstName' />      </td></tr>
              <tr><th>   <label for="POClastName" class="control-label">POC Last Name</label>   </th><td>  <input class="form-control col-lg-6" data-bind='value: POClastName' />      </td></tr>
+             <tr><th>   <label for="donationAmountReceived" class="control-label">Donation Amount Received</label>   </th><td>  <input class="form-control col-lg-6" data-bind='value: donationAmountReceived' />      </td></tr>
       </table>
+      <input type="text" class="dirty" data-bind='value: dirty' />
 
       </fieldset>
 
@@ -124,7 +130,7 @@
     <br />      
 
     <div style="clear: both">  
-          <button data-bind='click: addItem'>Add a contact</button>
+          <button data-bind='click: addItem'>Add a donor</button>
           <button data-bind='click: save'>Save</button>
             <ul class="navigate">
         <li class="ui-state-default ui-corner-all">

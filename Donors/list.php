@@ -3,6 +3,7 @@
 <?php include '../_scripts.html'; ?>
 <script src="../_extends.js"></script>
 <script src="../_authenticate.js"></script>
+<script src="../_stub.php"></script>
 <link href="../style.css" rel="stylesheet" type="text/css" />
 <script>
         $(function(){
@@ -17,31 +18,45 @@
             $.extend( 
                 $.Table
                 , {
-                    Key: '19RuwwJStqOBbPigLx--Lv3m6JpYvgbb7wj3AEV4'
+                    Key: $.AEDtables['Donors']
                     , Map: function( field ){
                         var map = {
                             firstName: "First Name"
                             , "First Name": "firstName"
                             , lastName: "Last Name"  
-                            , "Last Name": "lastName"  
-                            , addressLine1: "Address Line 1"
-                            , "Address Line 1": "addressLine1"
-                            , addressLine2: "Address Line 2" 
-                            , "Address Line 2": "addressLine2" 
+                            , "Last Name": "lastName"
+                            , preferredName: "Preferred Name"
+                            , "Preferred Name": "preferredName"
+                            , title: "Title"
+                            , "Title": "title"
+                            , addressLine1: "Street Address Line 1"
+                            , "Street Address Line 1": "addressLine1"
+                            , addressLine2: "Street Address Line 2" 
+                            , "Street Address Line 2": "addressLine2" 
                             , city: "City"
                             , "City": "city"
                             , state: "State" 
                             , "State": "state"
-                            , zip: "Zip"
-                            , "Zip": "zip"
-                            , contactType: "Contact Type"
-                            , "Contact Type": "contactType"
-                            , boardMemberName: "Board Member Name"
-                            , "Board Member Name": "boardMemberName"
+                            , zip: "ZIP"
+                            , "ZIP": "zip"
+                            , emailAdress: "Email"
+                            , "Email": "emailAdress"
+                            , donorType: "donorType"
+                            , "donorType": "donorType"
                             , donationAmountReceived: "Donation Amount Received"
                             , "Donation Amount Received": "donationAmountReceived"
-                            , boardAnnualTaxCredit: "Board Annual Tax Credit"
-                            , "Board Annual Tax Credit": "boardAnnualTaxCredit"
+                            , areBoardMember: "areBoardMember"
+                            , "areBoardMember": "areBoardMember"
+                            , orgName: "Organization Name"
+                            , "Organization Name": "orgName"
+                            , hPhone: "Home Phone"
+                            , "Home Phone": "hPhone"
+                            , cPhone: "Cell Phone"
+                            , "Cell Phone": "cPhone"
+                            , POCfirstName: "POC First Name"
+                            , "POC First Name": "POCfirstName"
+                            , POClastName: "POC Last Name"
+                            , "POC Last Name": "POClastName"
                         }
                         if( field ){
                             return map[field] || field; 
@@ -73,28 +88,35 @@
 
       <h1>Donors</h1>
 <div id='DonorsList' class='col-lg-20'>
-        <a href=".">Item View</a> &nbsp; &nbsp; <a class="openInDrive" href="#">Open in Google Drive</a>
+        <a href="index.php">Item View</a> &nbsp; &nbsp; <a class="openInDrive" href="#">Open in Google Drive</a>
       <div  class='donorsEditor Editor' >
       <fieldset class="col-lg-18 editgrid"  >     
-            <legend>Donor's List </legend>
+            <legend>Donor's List</legend>
 
 
 
 
-            <table>
+            <table class="list">
             <tr>          
-                <th>  id                                </th>         
-                <th>  First Name                        </th>      
-                <th>  Last Name                         </th>        
-                <th>  Address Line 1                    </th>    
-                <th>  Address Line 2                    </th>  
-                <th>  City                              </th>           
-                <th>  State                             </th>          
-                <th>  Zip                               </th>           
-                <th>  Contact Type                      </th>     
-                <th>  Board Member Name                 </th> 
-                <th>  Donation Amount Received          </th>        
-                <th>  Board Annual Tax Credit           </th>     
+                <th>  id                 </th>
+                <th>  First Name                 </th>
+                <th>  Last Name                 </th>
+                <th>  Preferred Name                 </th>
+                <th>  Title                 </th>
+                <th>  Address Line 1                 </th>
+                <th>  Address Line 2                 </th>
+                <th>  City                 </th>
+                <th>  State                 </th>
+                <th>  Zip                 </th>
+                <th>  Email Address                 </th>
+                <th>  Donor Type                 </th>
+                <th>  Board Member?                 </th>
+                <th>  Organization Name                 </th>
+                <th>  Home Phone                 </th>
+                <th>  Cell Phone                 </th>
+                <th>  POC First Name                 </th>
+                <th>  POC Last Name                 </th>
+                <th>  Donation Amount Received                 </th>
             </tr> 
             <tbody data-bind="foreach: { data:  $.Form.KO.Model.items }" class="Binder">
                 <tr>            
@@ -102,17 +124,28 @@
                         <input class="form-control col-lg-6" data-bind='value: rowid' />
                         <input type="text" class="dirty" data-bind='value: dirty' />
                     </td>
-                    <td>  <input class="form-control col-lg-6" data-bind='value: firstName' />                   </td>
-                    <td>  <input class="form-control col-lg-6" data-bind='value: lastName' />                    </td>
-                    <td>  <input class="form-control col-lg-6" data-bind='value: addressLine1' />                </td>
-                    <td>  <input class="form-control col-lg-6" data-bind='value: addressLine2' />                </td>
-                    <td>  <input class="form-control col-lg-6" data-bind='value: city' />                        </td>
-                    <td>  <input class="form-control col-lg-6" data-bind='value: state' />                       </td>
-                    <td>  <input class="form-control col-lg-6" data-bind='value: zip' />                         </td>
-                    <td>  <input class="form-control col-lg-6" data-bind='value: contactType' />                 </td>
-                    <td>  <input class="form-control col-lg-6" data-bind='value: boardMemberName' />             </td>
-                    <td>  <input class="form-control col-lg-6" data-bind='value: donationAmountReceived' />      </td>
-                    <td>  <input class="form-control col-lg-6" data-bind='value: boardAnnualTaxCredit' />        </td>
+                     <td>  <input class="form-control col-lg-6" data-bind='value: firstName' />                   </td>
+                     <td>  <input class="form-control col-lg-6" data-bind='value: lastName' />                    </td>
+                     <td>  <input class="form-control col-lg-6" data-bind='value: preferredName' />               </td>
+                     <td>  <input class="form-control col-lg-6" data-bind='value: title' />                       </td>
+                     <td>  <input class="form-control col-lg-6" data-bind='value: addressLine1' />                </td>
+                     <td>  <input class="form-control col-lg-6" data-bind='value: addressLine2' />                </td>
+                     <td>  <input class="form-control col-lg-6" data-bind='value: city' />                        </td>
+                     <td>  <input class="form-control col-lg-6" data-bind='value: state' />                       </td>
+                     <td>  <input class="form-control col-lg-6" data-bind='value: zip' />                         </td>
+                     <td>  <input class="form-control col-lg-6" data-bind='value: emailAdress' />                  </td>
+                     <td>  <select class="form-control col-lg-6" data-bind='value: donorType' />                   
+                                  <option value="ind">Individual</option>
+                                  <option value="org">Foundation</option>
+                                  <option value="gov">Government</option>
+                           </select>                                                                               </td>
+                     <td>  <input type="checkbox" class="form-control col-lg-6" data-bind='value: areBoardMember' /> </td>
+                     <td>  <input class="form-control col-lg-6" data-bind='value: orgName' />      </td>
+                     <td>  <input class="form-control col-lg-6" data-bind='value: hPhone' />      </td>
+                     <td>  <input class="form-control col-lg-6" data-bind='value: cPhone' />      </td>
+                     <td>  <input class="form-control col-lg-6" data-bind='value: POCfirstName' />      </td>
+                     <td>  <input class="form-control col-lg-6" data-bind='value: POClastName' />      </td>
+                     <td>  <input class="form-control col-lg-6" data-bind='value: donationAmountReceived' />      </td>
                     <td>  <button data-bind='click: $root.removeItem'>Delete</button>                            </td>
                      
                 </tr>

@@ -9,9 +9,7 @@
 $xml = '<entry xmlns="http://www.w3.org/2005/Atom" xmlns:batch="http://schemas.google.com/gdata/batch" xmlns:gsx="http://schemas.google.com/spreadsheets/2006/extended">';
 // $xml .= '<gsx:head1>foo</gsx:head1>';
 // $xml .= '<gsx:head2>bar</gsx:head2>';
-
-$xml .= $row ;
-$xml .= '</entry>';
+$xml .= $row .'</entry>';
 
  $ch = curl_init();
  curl_setopt($ch, CURLOPT_URL, $url );
@@ -21,5 +19,5 @@ $xml .= '</entry>';
  curl_setopt($ch, CURLOPT_POSTFIELDS,  $xml );
  $google_sheet = curl_exec($ch);
  
- var_dump($google_sheet);
+ var_dump( $google_sheet ); //. $xml
 ?>

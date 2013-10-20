@@ -181,25 +181,25 @@ console.log(xhr.responseJSON);
 <div id='InvoicesList' class='col-lg-12'>
         <a href="list.php">List View</a> &nbsp; &nbsp; <a class="openInDrive" href="#">Open in Google Drive</a>
  <br/>
-      <label for="txt_InvoiceNumber">Invoice Number</label> <input type ='text' id="txt_InvoiceNumber"/> <br/>
-      <input type='submit' value="Search by Invoice" id='btn_search' />
+      <!-- <label for="txt_InvoiceNumber">Invoice Number</label> <input type ='text' id="txt_InvoiceNumber"/> <br/>
+      <input type='submit' value="Search by Invoice" id='btn_search' /> -->
       <div  class='invoicesEditor Editor Binder' data-bind="foreach: { data:  $.Form.KO.Model.items }">
       
       <fieldset class="col-lg-10 editgrid" data-bind=" attr: {'id': 'fieldset_' + rowid}" style="display: none">     
-            <legend data-bind='html: invoiceNumber'> </legend>
+            <legend data-bind='html: invoiceNumber'> </legend><br/>
 
             <button data-bind='click: $root.removeItem'>Delete</button><br/>
 
 <table>
          <tr><th>   <label for="rowid" class="control-label">id</label>                                          </th><td>  <input class="form-control col-lg-6" data-bind='value: rowid' />                       </td></tr>
          <tr><th>   <label for="date" class="control-label">Event Date</label>                              </th><td>  <input class="form-control col-lg-6"  data-bind='value: date' />                   </td></tr>
-         <tr><th>   <label for="schoolName" class="control-label">School Name</label>                       </th><td>  <input class="form-control col-lg-6" data-bind='value: schoolName' />                
+         <tr><th>   <label for="schoolName" class="control-label">School Name</label>                       </th><td> <!--  <input class="form-control col-lg-6" data-bind='value: schoolName' /> -->                
             <select class='form-control col-lg-6' data-bind='value:schoolName' id='schoolSelect'>
                 
             </select>
          </td></tr>
          <tr><th>   <label for="invoiceNumber" class="control-label">Invoice Number</label>                                </th><td>  <input class="form-control col-lg-6" data-bind='value: invoiceNumber' />                    </td></tr>
-         <tr><th>   <label for="vendorName" class="control-label">Vendor Name</label>                       </th><td>  <input class="form-control col-lg-6" data-bind='value: vendorName' />                
+         <tr><th>   <label for="vendorName" class="control-label">Vendor Name</label>                       </th><td>  <!-- <input class="form-control col-lg-6" data-bind='value: vendorName' /> -->                
          <select class='form-control col-lg-6' data-bind="value: vendorName" id='vendorSelect'>
          
          </select>
@@ -232,7 +232,7 @@ console.log(xhr.responseJSON);
     <br />      
 
     <div style="clear: both">  
-          <button data-bind='click: addItem'>Add a contact</button>
+          <button data-bind='click: addItem'>Add an Invoice</button>
           <button data-bind='click: save'>Save</button>
             <ul class="navigate">
         <li class="ui-state-default ui-corner-all">

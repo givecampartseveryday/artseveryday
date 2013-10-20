@@ -102,7 +102,7 @@
 
       <h1>Schools</h1>
 <div id='SchoolsList' class='col-lg-20'>
-        <a href=".">Item View</a> &nbsp; &nbsp; <a class="openInDrive" href="#">Open in Google Drive</a>
+        <a href="index.php">Item View</a> &nbsp; &nbsp; <a class="openInDrive" href="#">Open in Google Drive</a>
       <div  class='SchoolsEditor Editor' >
       <fieldset class="col-lg-18 editgrid"  >     
             <legend>Schools List </legend>

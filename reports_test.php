@@ -72,12 +72,26 @@ function packJSONforSpreadsheet (json, reportType, start, end) {
     var rows = json.rows.length;
     var cols = json.columns.length;
     var header = json.columns;
-    var data = json.rows;
+    var data = []
 
-    var packed = {"title":title, "worksheetTitle": worksheetTitle,
-        "rows":rows, "cols":cols, "header":header, "data": data};
-        
-    //$.Reports
+    $.each( json.rows, function(rowIndex, row){
+        var _row = []
+            $.each(row, function(colIndex,cell){
+                    _row.push(cell.toString().toLowerCase() )
+                })
+                data.push(_row)
+            })
+
+    
+    //Strip spaces out of header names
+    for (var i = 0; i < cols; i++ ) {
+        header[i] = header[i].replace(/\s+/g, "");
+    }
+    
+    
+
+    var packed = {"spreadSheetTitle":title, "worksheetTitle": worksheetTitle,
+        "rowsCount":rows, "colsCount":cols, "header":header, "rows": data};
         
     return packed;
 }
@@ -98,9 +112,9 @@ function generateJSONByArtForm(inputs) {
         sql += " WHERE ";
         sql += "'Art Form Type' = ";
         sql += "'" + inputs["artForm"] + "'";
-        sql += " AND 'Date' > " 
+        sql += " AND 'Date' >= " 
         sql += "'" + inputs["start"] + "'";
-        sql += " AND 'Date' < " 
+        sql += " AND 'Date' <= " 
         sql += "'" + inputs["end"] + "'";
         
     url += sql
@@ -109,7 +123,16 @@ function generateJSONByArtForm(inputs) {
     var xhr = $.get(url, 
     
         function(response) {
-            console.log(packJSONforSpreadsheet(response, inputs["artForm"], inputs["start"], inputs["end"]));
+            var packed = packJSONforSpreadsheet(response, inputs["artForm"], inputs["start"], inputs["end"]);
+
+            $.Reports.spreadSheetTitle = packed.spreadSheetTitle
+            $.Reports.workSheetTitle = packed.worksheetTitle
+            $.Reports.rowsCount = packed.rowsCount
+            $.Reports.colsCount = packed.colsCount
+            $.Reports.header = packed.header
+            $.Reports.rows = packed.rows
+       
+            $.Reports.makeReport();
     });
 }
 
@@ -128,9 +151,9 @@ function generateJSONByProgramType(inputs) {
         sql += " WHERE ";
         sql += "'Program Type' = ";
         sql += "'" + inputs["programType"] + "'";
-        sql += " AND 'Date' > " 
+        sql += " AND 'Date' >= " 
         sql += "'" + inputs["start"] + "'";
-        sql += " AND 'Date' < " 
+        sql += " AND 'Date' <= " 
         sql += "'" + inputs["end"] + "'";
         
     url += sql
@@ -138,10 +161,17 @@ function generateJSONByProgramType(inputs) {
     var xhr = $.get(url, 
     
         function(response) {
-            console.log(response);
-            console.log(packJSONforSpreadsheet(response, inputs["programType"], inputs["start"], inputs["end"]));
-    });
+            var packed = packJSONforSpreadsheet(response, inputs["programType"], inputs["start"], inputs["end"]);
 
+            $.Reports.spreadSheetTitle = packed.spreadSheetTitle
+            $.Reports.workSheetTitle = packed.worksheetTitle
+            $.Reports.rowsCount = packed.rowsCount
+            $.Reports.colsCount = packed.colsCount
+            $.Reports.header = packed.header
+            $.Reports.rows = packed.rows
+       
+            $.Reports.makeReport();
+    });
 }
 
 function generateJSONBySchoolName(inputs) {
@@ -159,9 +189,9 @@ function generateJSONBySchoolName(inputs) {
         sql += " WHERE ";
         sql += "'School Name' = ";
         sql += "'" + inputs["school"] + "'";
-        sql += " AND 'Date' > " 
+        sql += " AND 'Date' >= " 
         sql += "'" + inputs["start"] + "'";
-        sql += " AND 'Date' < " 
+        sql += " AND 'Date' <= " 
         sql += "'" + inputs["end"] + "'";
         
     url += sql
@@ -170,10 +200,21 @@ function generateJSONBySchoolName(inputs) {
     var xhr = $.get(url, 
     
         function(response) {
-            console.log(packJSONforSpreadsheet(response, inputs["school"], inputs["start"], inputs["end"]));
+            var packed = packJSONforSpreadsheet(response, inputs["artForm"], inputs["start"], inputs["end"]);
+
+            $.Reports.spreadSheetTitle = packed.spreadSheetTitle
+            $.Reports.workSheetTitle = packed.worksheetTitle
+            $.Reports.rowsCount = packed.rowsCount
+            $.Reports.colsCount = packed.colsCount
+            $.Reports.header = packed.header
+            $.Reports.rows = packed.rows
+       
+            $.Reports.makeReport();
+        
     });
 }
 
+/*
 $(function(){
      $('.logout').click(function(e){
             $.LogOut()
@@ -183,9 +224,10 @@ $(function(){
          $( '.token' ).text( token )
          //debugger;
          //$.Reports.Header = ""
-         $.Reports.List()
+         $.Reports.makeReport()
     })
 })
+*/
 </script>
 </head>
 <body>

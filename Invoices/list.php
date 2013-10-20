@@ -83,7 +83,7 @@
 
       <h1>Invoices</h1>
 <div id='InvoicesList' class='col-lg-20'>
-        <a href=".">Item View</a> &nbsp; &nbsp; <a class="openInDrive" href="#">Open in Google Drive</a>
+        <a href="index.php">Item View</a> &nbsp; &nbsp; <a class="openInDrive" href="#">Open in Google Drive</a>
       <div  class='invoicesEditor Editor' >
       <fieldset class="col-lg-18 editgrid"  >     
             <legend>Invoice's List </legend>

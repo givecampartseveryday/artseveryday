@@ -19,9 +19,9 @@ $.AEDartforms = [
 $.AEDprogramtypes = [
     "Select One"
     , "Field Trip"
-    , "Out of School Performance"
+    , "Out of School performance"
     , "Transportation"
     , "Residency"
-    , "In-School Performance"
-    , "In-School Workshop"
+    , "In-School performance"
+    , "In-school Workshop"
 ];
