@@ -3,68 +3,62 @@
 <?php include '../_scripts.html'; ?>
 <script src="../_extends.js"></script>
 <script src="../_authenticate.js"></script>
+<script src="../_reports.js"></script>
 <script src="../_stub.php"></script>
 <link href="../style.css" rel="stylesheet" type="text/css" />
 <script>
 
-
-
-    $(function () {
+    $(document).ready(function() {
     
-    var url = "https://www.googleapis.com/fusiontables/v1/query";
-var token = $.Hash["access_token"];
-    url += "?access_token=" + token;
-
-
-var sql = "&sql=";
-    sql += "SELECT 'School Name' ";
-
-    sql += "FROM ";
-    sql += $.AEDtables["Schools"];
-
-url += sql;
-console.log(url);
-
-var xhr = $.get(url, 
-     function(response) {
-     $("#schoolSelect").append("<option> Select One </option>");
-         for (var i in response.rows) {
-             //console.log(response.rows[i]);
-
-             $("#schoolSelect").append("<option>"+response.rows[i]+"</option>");
-         }
-     }
- );
- console.log(xhr);
-console.log(xhr.responseJSON);
-
-
-     url = "https://www.googleapis.com/fusiontables/v1/query";
- //token = $.Hash["access_token"];
-    url += "?access_token=" + token;
-
-
- sql = "&sql=";
-    sql += "SELECT 'Organization Name' ";
-
-    sql += "FROM ";
-    sql += $.AEDtables["Vendors"];
-
-url += sql;
-console.log(url);
-
- xhr = $.get(url, 
-     function(response) {
-     $("#schoolSelect").append("<option> Select One </option>");
-         for (var i in response.rows) {
-             //console.log(response.rows[i]);
-
-             $("#vendorSelect").append("<option>"+response.rows[i]+"</option>");
-         }
-     }
- );
- console.log(xhr);
-console.log(xhr.responseJSON);
+        var url = "https://www.googleapis.com/fusiontables/v1/query";
+        var token = $.Hash["access_token"];
+        url += "?access_token=" + token;
+    
+    
+        var sql = "&sql=";
+        sql += "SELECT 'School Name' ";
+    
+        sql += "FROM ";
+        sql += $.AEDtables["Schools"];
+    
+        url += sql;
+        console.log(url);
+    
+        var xhr = $.get(url, 
+            function(response) {
+                $("#schoolSelect").append("<option> Select One </option>");
+                for (var i in response.rows) {
+                    $("#schoolSelect").append("<option>"+response.rows[i]+"</option>");
+                }  
+            }
+         );
+    
+    
+        url = "https://www.googleapis.com/fusiontables/v1/query";
+        token = $.Hash["access_token"];
+        url += "?access_token=" + token;
+    
+    
+        sql = "&sql=";
+        sql += "SELECT 'Organization Name' ";
+    
+        sql += "FROM ";
+        sql += $.AEDtables["Vendors"];
+    
+        url += sql;
+        console.log(url);
+    
+        xhr = $.get(url, 
+            function(response) {
+            $("#schoolSelect").append("<option> Select One </option>");
+            for (var i in response.rows) {
+                 //console.log(response.rows[i]);
+    
+                 $("#vendorSelect").append("<option>"+response.rows[i]+"</option>");
+            }
+        }
+        )
+    });
 
 
     $('#btn_search').click(function () {
@@ -81,7 +75,7 @@ console.log(xhr.responseJSON);
 
     event.preventDefault();
     return false;
-})
+    });
         //$.currentNode; 
         //debugger; 
         $.extend(
@@ -230,7 +224,7 @@ console.log(xhr.responseJSON);
 
       </div><!-- Invoice Editor databinder -->
 
-    <br />      
+    <br />
 
     <div style="clear: both">  
           <button data-bind='click: addItem'>Add an Invoice</button>
@@ -253,6 +247,64 @@ console.log(xhr.responseJSON);
     
     </div><!-- Invoice List -->
     </div><!-- container -->
+    
+    <div class="container">
+
+    <h1>Reports</h1>
+    <p>
+       Generate reports.
+    </p>
+
+    
+      <br/>
+      <a href="#" class="logout">Lout Out of Google</a>
+    <pre class="token">
+    </pre>
+    
+        <div id=byArtForm>
+            <form id=generateReportByArtForm>
+            <table id=artFormTable>
+                <tr><th>   <label>By Art Form</label> </th><td>  <select name=artForm id=artFormSelect ></select> </td></tr>
+                <tr><td><label>Start Date</label> <input name=start placeholder="MM/DD/YYYY" /></td>  <td><label>End Date</label> <input name=end placeholder="MM/DD/YYYY" /></td></tr>
+            </table>
+            
+            <button type=button onClick="generateJSONByArtForm(objectSerialize($('#generateReportByArtForm')))">Go!</button>
+            </form>
+            
+            
+            <hr>
+        </div>
+        
+        <div id=byProgramType>
+            <form id=generateReportByProgramType>
+            <table id=programTypeTable>
+                <tr><th>   <label>By Program Type</label> </th><td>  <select name=programType id=programTypeSelect ></select> </td></tr>
+                <tr><td><label>Start Date</label> <input name=start placeholder="MM/DD/YYYY" /></td>  <td><label>End Date</label> <input name=end placeholder="MM/DD/YYYY" /></td></tr>
+            </table>
+            
+            <button type=button onClick="generateJSONByProgramType(objectSerialize($('#generateReportByProgramType')))">Go!</button>
+            </form>
+            
+            <hr>
+        </div>
+        
+        <div id=bySchool>
+            <form id=generateReportBySchool>
+            <table>
+                <tr><th>    <label>By School</label> </th><td> <select name=school id=schoolSelect></select> </td></tr>
+                <tr><td><label>Start Date</label> <input name=start placeholder="MM/DD/YYYY" /></td>  <td><label>End Date</label> <input name=end placeholder="MM/DD/YYYY" /></td></tr>
+            </table>
+            
+            <button type=button onClick="generateJSONBySchoolName(objectSerialize($('#generateReportBySchool')))">Go!</button>
+            
+            <hr>
+        </div>
+        
+
+    </div>
+
+
+    
     
 <?php include '../_footer.html'; ?>
 </body>

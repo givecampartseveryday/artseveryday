@@ -20,10 +20,23 @@ $(function(){
     })
 })
 $(function(){
+    //$.
+    $.FusionGetTable( $.AEDtables['Donations'], function(data){
+        $.each( data, function(row){
+            
+            var opt = '<option value="{0}">{1}</option>'.format(row['Donor Last Name'], row['Donor First Name'] );
+            $('.donor').append( )
+        })
+        debugger; 
+    })
     $('.byDonor').submit(function(ev){
         ev.preventDefault();
+        
     })
 })
+
+
+
 </script>
 <body>
 <?php include '_header.html'; ?>
@@ -38,7 +51,7 @@ $(function(){
     
 
             <form id=byDonor class="byDonor">
-                <label for="artForm">By Art Form</label> <select name=donor id=donor ></select> 
+                <label for="artForm">By Art Form</label> <select class="donor" name=donor id=donor ></select> <br/>
                 <input type="submit" text="Go!" >
             </form>
             

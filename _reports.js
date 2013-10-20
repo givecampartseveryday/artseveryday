@@ -189,7 +189,7 @@ function objectSerialize(form) {
     return o;
 };
 
-function packJSONforSpreadsheet (json, reportType, start, end) {
+function packJSONforInvoiceSpreadsheet (json, reportType, start, end) {
     var title = "Invoices for " + reportType + ' over ' + start + '-' + end;
     var worksheetTitle = "Invoices for " + reportType;
     var rows = json.rows.length;
@@ -219,6 +219,35 @@ function packJSONforSpreadsheet (json, reportType, start, end) {
     return packed;
 }
 
+function packJSONforDonationSpreadsheet (json, reportType, start, end) {
+    var title = "Donations for " + reportType + ' over ' + start + '-' + end;
+    var worksheetTitle = "Donations for " + reportType;
+    var rows = json.rows.length;
+    var cols = json.columns.length;
+    var header = json.columns;
+    var data = []
+
+    $.each( json.rows, function(rowIndex, row){
+        var _row = []
+            $.each(row, function(colIndex,cell){
+                    _row.push(cell.toString().toLowerCase() )
+                })
+                data.push(_row)
+            })
+
+    
+    //Strip spaces out of header names
+    for (var i = 0; i < cols; i++ ) {
+        header[i] = header[i].replace(/\s+/g, "");
+    }
+    
+    
+
+    var packed = {"spreadSheetTitle":title, "worksheetTitle": worksheetTitle,
+        "rowsCount":rows, "colsCount":cols, "header":header, "rows": data};
+        
+    return packed;
+}
 
 function generateJSONByArtForm(inputs) {
     var url = "https://www.googleapis.com/fusiontables/v1/query";
@@ -227,7 +256,7 @@ function generateJSONByArtForm(inputs) {
     
     
     var sql = "&sql=";
-        sql += "SELECT 'Date', 'Vendor', 'Vendor ID', 'Invoice Number', 'School Name' ";
+        sql += "SELECT 'Date', 'Vendor Name', 'VendorID', 'Invoice Number', 'School Name' ";
         
         sql += "FROM ";
         sql += $.AEDtables["Invoices"];
@@ -246,7 +275,7 @@ function generateJSONByArtForm(inputs) {
     var xhr = $.get(url, 
     
         function(response) {
-            var packed = packJSONforSpreadsheet(response, inputs["artForm"], inputs["start"], inputs["end"]);
+            var packed = packJSONforInvoiceSpreadsheet(response, inputs["artForm"], inputs["start"], inputs["end"]);
 
             $.Reports.spreadSheetTitle = packed.spreadSheetTitle
             $.Reports.workSheetTitle = packed.worksheetTitle
@@ -266,7 +295,7 @@ function generateJSONByProgramType(inputs) {
     
     
     var sql = "&sql=";
-        sql += "SELECT 'Date', 'Vendor', 'Vendor ID', 'Invoice Number', 'School Name' ";
+        sql += "SELECT 'Date', 'Vendor Name', 'VendorID', 'Invoice Number', 'School Name' ";
         
         sql += "FROM ";
         sql += $.AEDtables["Invoices"];
@@ -284,7 +313,7 @@ function generateJSONByProgramType(inputs) {
     var xhr = $.get(url, 
     
         function(response) {
-            var packed = packJSONforSpreadsheet(response, inputs["programType"], inputs["start"], inputs["end"]);
+            var packed = packJSONforInvoiceSpreadsheet(response, inputs["programType"], inputs["start"], inputs["end"]);
 
             $.Reports.spreadSheetTitle = packed.spreadSheetTitle
             $.Reports.workSheetTitle = packed.worksheetTitle
@@ -323,7 +352,7 @@ function generateJSONBySchoolName(inputs) {
     var xhr = $.get(url, 
     
         function(response) {
-            var packed = packJSONforSpreadsheet(response, inputs["school"], inputs["start"], inputs["end"]);
+            var packed = packJSONforInvoiceSpreadsheet(response, inputs["school"], inputs["start"], inputs["end"]);
 
             $.Reports.spreadSheetTitle = packed.spreadSheetTitle
             $.Reports.workSheetTitle = packed.worksheetTitle
@@ -335,5 +364,37 @@ function generateJSONBySchoolName(inputs) {
             $.Reports.makeReport();
         
     });
+}
+
+function generateJSONByDonorName(inputs) {
+    var url = "https://www.googleapis.com/fusiontables/v1/query";
+    var token = $.Hash["access_token"];
+        url += "?access_token=" + token;
+    
+    
+    var sql = "&sql=";
+        sql += "SELECT 'Donor Name', 'Vendor Name', 'VendorID', 'Invoice Number', 'School Name' ";
+        
+        sql += "FROM ";
+        sql += $.AEDtables["Invoices"];
+        
+        sql += " WHERE ";
+        sql += "'School Name' = ";
+        sql += "'" + inputs["school"] + "'";
+        sql += " AND 'Date' >= " 
+        sql += "'" + inputs["start"] + "'";
+        sql += " AND 'Date' <= " 
+        sql += "'" + inputs["end"] + "'";
+        
+    url += sql
+    console.log(url);
+}
+
+function generateJSONByBoardContact(inputs) {
+    
+}
+
+function generateJSONByFiscalYear(inputs){
+    
 }
     
