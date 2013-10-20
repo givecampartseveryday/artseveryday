@@ -8,32 +8,72 @@
 <link href="../style.css" rel="stylesheet" type="text/css" />
 <script>
 
-    $(document).ready(function() {
+   $(document).ready(function(){
+    var artForms = $.AEDartforms;
+    var programTypes = $.AEDprogramtypes;
     
-        var url = "https://www.googleapis.com/fusiontables/v1/query";
-        var token = $.Hash["access_token"];
+    
+    //Fill the Art Forms and Program Types <select> elements from the
+    //global $.AEDartforms and $.AEDprogramtypes variables. These are defined
+    //in _stub.php. These are not dynamic.
+    for (var i = 0; i < artForms.length; i++) {
+        $("#artFormSelect").append("<option>"+artForms[i]+"</option>");
+        $("#programTypeSelect").append("<option>"+programTypes[i]+"</option>");
+    }
+    
+    //Fill the Schools <select> element. Since the list of schools can change,
+    //this element is filled by querying the Schools Fusion Table and getting
+    //all the School Names
+    var url = "https://www.googleapis.com/fusiontables/v1/query";
+    var token = $.Hash["access_token"];
         url += "?access_token=" + token;
     
     
-        var sql = "&sql=";
+    var sql = "&sql=";
         sql += "SELECT 'School Name' ";
-    
+        
         sql += "FROM ";
         sql += $.AEDtables["Schools"];
+        
+    url += sql;
+    console.log(url);
     
-        url += sql;
-        console.log(url);
-    
-        var xhr = $.get(url, 
-            function(response) {
-                $("#schoolSelect").append("<option> Select One </option>");
-                for (var i in response.rows) {
-                    $("#schoolSelect").append("<option>"+response.rows[i]+"</option>");
-                }  
+    var xhr = $.get(url, 
+        function(response) {
+            for (var i in response.rows) {
+                $("#schoolSelect").append("<option>"+response.rows[i]+"</option>");
             }
-         );
+        }
+    );
+
+/*    
+    url = "https://www.googleapis.com/fusiontables/v1/query";
+    token = $.Hash["access_token"];
+    url += "?access_token=" + token;
     
     
+    sql = "&sql=";
+    sql += "SELECT 'Organization Name' ";
+    
+    sql += "FROM ";
+    sql += $.AEDtables["Vendors"];
+    
+    url += sql;
+    console.log(url);
+    
+    xhr = $.get(url, 
+        function(response) {
+        $("#schoolSelect").append("<option> Select One </option>");
+        for (var i in response.rows) {
+             //console.log(response.rows[i]);
+         $("#vendorSelect").append("<option>"+response.rows[i]+"</option>");
+        }
+        }
+    ) 
+*/
+});
+    
+/*    
         url = "https://www.googleapis.com/fusiontables/v1/query";
         token = $.Hash["access_token"];
         url += "?access_token=" + token;
@@ -59,6 +99,7 @@
         }
         )
     });
+*/    
 
 
     $('#btn_search').click(function () {

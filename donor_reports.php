@@ -22,12 +22,13 @@ $(function(){
 $(function(){
     //$.
     $.FusionGetTable( $.AEDtables['Donations'], function(data){
-        $.each( data, function(row){
-            
+        $.each( data, function(i, row){
+            debugger; debugger; 
             var opt = '<option value="{0}">{1}</option>'.format(row['Donor Last Name'], row['Donor First Name'] );
-            $('.donor').append( )
+            debugger; 
+            $('.donor').append( opt )
         })
-        debugger; 
+        // /debugger; 
     })
     $('.byDonor').submit(function(ev){
         ev.preventDefault();
@@ -63,5 +64,3 @@ $(function(){
     
 <?php include '_footer.html'; ?>
 </body>
-
-</html>
