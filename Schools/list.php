@@ -23,8 +23,14 @@
                         var map = {
                             schoolname: "School Name"
                             , "School Name": "schoolname"
-                            , integrationCoach: "Arts Integration Coach"
-                            , "Arts Integration Coach": "integrationCoach"
+                            , integrationCoachTitle: "Arts Integration Coach Title"
+                            , "Arts Integration Coach Title": "integrationCoachTitle"
+                            , integrationCoachFirstName: "Arts Integration Coach First Name"
+                            , "Arts Integration Coach First Name": "integrationCoachFirstName"
+                            , integrationCoachLastName: "Arts Integration Coach Last Name"
+                            , "Arts Integration Coach Last Name": "integrationCoachLastName"
+                            , integrationCoachEmail: "Arts Integration Coach Email"
+                            , "Arts Integration Coach Email": "integrationCoachEmail"
                             , enrollment: "Student Enrollment" 
                             , "Student Enrollment": "enrollment" 
                             , title1: "Title 1"
@@ -55,6 +61,16 @@
                             , "Number of Art Teachers Full Time": "numberOfArtTeachersFullTime"
                             , yearJoined: "Year Joined"
                             , "Year Joined": "yearJoined"
+                            , other: "Other"
+                            , "Other": "other"
+                            , principalTitle: "Principal Title"
+                            , "Principal Title": "principalTitle"
+                            , principalFirstName: "Principal First Name"
+                            , "Principal First Name": "principalFirstName"
+                            , principalLastName: "Principal Last Name"
+                            , "Principal Last Name": "principalLastName"
+                            , principalEmail: "Principal Email"
+                            , "Principal Email": "principalEmail"
                         }
                         if( field ){
                             return map[field] || field; 
@@ -99,7 +115,14 @@
                 <th>  Row ID </th>
                 <th>  School Name                                </th>         
                 <th>  School Code                        </th>      
-                <th>  Arts Integration Coach                         </th>        
+                <th>  Arts Integration Coach Title                         </th>
+                <th>  Arts Integration Coach First Name                         </th>
+                <th>  Arts Integration Coach Last Name                         </th>
+                <th>  Arts Integration Coach Email                         </th>
+                <th>  Principal Title                         </th>
+                <th>  Principal First Name                         </th>
+                <th>  Principal Last Name                         </th>
+                <th>  Principal Email                         </th>
                 <th>  Student Enrollment                    </th>    
                 <th>  Title 1?                    </th>  
                 <th>  Targeted Assistance?                              </th>           
@@ -123,7 +146,15 @@
                     </td>
                     <td>  <input class="form-control col-lg-6" data-bind='value: schoolname' />                   </td>
                     <td>  <input class="form-control col-lg-6" data-bind='value: schoolCode' />                    </td>
-                    <td>  <input class="form-control col-lg-6" data-bind='value: integrationCoach' />                </td>
+                    <td>  <input class="form-control col-lg-6" data-bind='value: integrationCoachTitle' />                    </td>
+                    <td>  <input class="form-control col-lg-6" data-bind='value: integrationCoachFirstName' />                    </td>
+                    <td>  <input class="form-control col-lg-6" data-bind='value: integrationCoachLastName' />                    </td>
+                    <td>  <input class="form-control col-lg-6" data-bind="value: integrationCoachEmail" /></td>
+                    <td>  <input class="form-control col-lg-6" data-bind='value: principalTitle' /> </td>
+                    <td>  <input class="form-control col-lg-6" data-bind='value: principalFirstName' /> </td>
+                    <td>  <input class="form-control col-lg-6" data-bind='value: principalLastName' /> </td>
+                    <td>  <input class="form-control col-lg-6" data-bind="value: principalEmail" /></td>
+         
                     <td>  <input class="form-control col-lg-6" data-bind='value: enrollment' />                </td>
                     <td>  <input class="form-control col-lg-6" data-bind='value: title1' />                        </td>
                     <td>  <input type="checkbox" class="form-control col-lg-6" data-bind='value: targetedAssistance' />                       </td>

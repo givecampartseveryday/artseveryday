@@ -5,13 +5,16 @@
  $token = $_REQUEST['token'];
  $ssid = $_REQUEST['ssid'];
  $wsid = $_REQUEST['wsid'];
+ $sheetHeader = $_REQUEST['sheetHeader'];
+ $colNumber = $_REQUEST['colNumber'];
+ 
  
  $url = 'https://spreadsheets.google.com/feeds/cells/' . $ssid . '/' . $wsid . '/private/full';
 
  $xml = '<entry xmlns="http://www.w3.org/2005/Atom" xmlns:gs="http://schemas.google.com/spreadsheets/2006">';
- $xml .= '<id>' . $url . '/R1C1</id>';
- $xml .= '<link rel="edit" type="application/atom+xml" href="' . $url . '/R1C1"/>';                    
- $xml .= '<gs:cell row="1" col="1" inputValue="hours"/>';
+ $xml .= '<id>' . $url . '/R1C' . $colNumber . '</id>';
+ $xml .= '<link rel="edit" type="application/atom+xml" href="' . $url . '/R1C' . $colNumber . '"/>';                    
+ $xml .= '<gs:cell row="1" col="' . $colNumber . '" inputValue="' . $sheetHeader . '"/>';
  $xml .= '</entry>';
  
  echo  $url ;

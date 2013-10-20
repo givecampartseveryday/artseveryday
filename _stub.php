@@ -8,6 +8,7 @@ $.AEDtables = {
 };
 
 $.AEDartforms = [
+    "Select One",
     "Dance",
     "Theater",
     "Music",
@@ -16,7 +17,8 @@ $.AEDartforms = [
 ];
 
 $.AEDprogramtypes = [
-    "Field Trip"
+    "Select One"
+    , "Field Trip"
     , "Out of School Performance"
     , "Transportation"
     , "Residency"

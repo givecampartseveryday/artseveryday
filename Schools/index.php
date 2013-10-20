@@ -73,6 +73,8 @@
                             , "Principal First Name": "principalFirstName"
                             , principalLastName: "Principal Last Name"
                             , "Principal Last Name": "principalLastName"
+                            , principalEmail: "Principal Email"
+                            , "Principal Email": "principalEmail"
                         
                         }
                         if( field ){
@@ -114,19 +116,20 @@
             <button data-bind='click: $root.removeItem'>Delete</button><br/>
 
 <table>
-         <tr><th>   <label for="schoolname" class="control-label">School Name</label>                          </th><td>  <input class="form-control col-lg-6" data-bind='value: schoolname' />                       </td></tr>
+         <tr><th>   <label for="schoolname" class="control-label">School Name</label>                          </th><td>  <input size="60" class="form-control col-lg-6" data-bind='value: schoolname' />                       </td></tr>
          <tr><th>   <label for="schoolCode" class="control-label">School Code</label>                          </th><td>  <input class="form-control col-lg-6" data-bind='value: schoolCode' />                   </td></tr>
          <tr><th>   <label for="integrationCoachTitle" class="control-label">Integration Coach Title</label>         </th><td>  <input class="form-control col-lg-6" data-bind='value: integrationCoachTitle' />                    </td></tr>
          <tr><th>   <label for="integrationCoachFirstName" class="control-label">Integration Coach First Name</label>         </th><td>  <input class="form-control col-lg-6" data-bind='value: integrationCoachFirstName' />                    </td></tr>
          <tr><th>   <label for="integrationCoachLastName" class="control-label">Integration Coach Last Name</label>         </th><td>  <input class="form-control col-lg-6" data-bind='value: integrationCoachLastName' />                    </td></tr>
+         <tr><th>   <label for="integrationCoachEmail" class="control-label">Integration Coach Email</label>                          </th><td>  <input class="form-control col-lg-6" data-bind="value: integrationCoachEmail" /></td></tr>
          <tr><th>   <label for="principalTitle" class="control-label">Principal Title</label>                                     </th><td>  <input class="form-control col-lg-6" data-bind='value: principalTitle' /> </td></tr>
          <tr><th>   <label for="principalFirstName" class="control-label">Principal First Name</label>                                     </th><td>  <input class="form-control col-lg-6" data-bind='value: principalFirstName' /> </td></tr>
          <tr><th>   <label for="principalLastName" class="control-label">Principal Last Name</label>                                     </th><td>  <input class="form-control col-lg-6" data-bind='value: principalLastName' /> </td></tr>
+         <tr><th>   <label for="principalEmail" class="control-label">Principal Email</label>                  </th><td>  <input class="form-control col-lg-6" data-bind="value: principalEmail" /></td></tr>
          <tr><th>   <label for="enrollment" class="control-label">Student Enrollment</label>                   </th><td>  <input class="form-control col-lg-6" data-bind='value: enrollment' />                </td></tr>
          <tr><th>   <label for="title1" class="control-label">Title 1?</label>                                 </th><td>  <input title="Check for yes" type="checkbox" class="form-control col-lg-6" data-bind='value: title1' />                </td></tr>
          <tr><th>   <label for="targetedAssistance" class="control-label">Targeted Assistance?</label>         </th><td>  <input title="Check for yes" type="checkbox" class="form-control col-lg-6" data-bind='value: targetedAssistance' />                     </td></tr>
          <tr><th>   <label for="farmsRate" class="control-label">FARMS Rate</label>                            </th><td>  <input class="form-control col-lg-6" data-bind='value: farmsRate' placeholder='Enter as decimal 0-1.00' />                       </td></tr>
-         <tr><th>   <label for="schoolCode" class="control-label">School Code</label>                          </th><td>  <input class="form-control col-lg-6" data-bind='value: schoolCode' />                       </td></tr>
          <tr><th>   <label for="streetLine1" class="control-label">Street Address Line 1</label>               </th><td>  <input class="form-control col-lg-6" data-bind='value: streetLine1' />                       </td></tr>
          <tr><th>   <label for="streetLine2" class="control-label">Street Address Line 2</label>               </th><td>  <input class="form-control col-lg-6" data-bind='value: streetLine2' />                       </td></tr>
          <tr><th>   <label for="city" class="control-label">City</label>                                       </th><td>  <input class="form-control col-lg-6" data-bind='value: city' />                       </td></tr>
@@ -136,6 +139,7 @@
          <tr><th>   <label for="gradeRanges" class="control-label">Grade Ranges</label>                        </th><td>  <input class="form-control col-lg-6" data-bind='value: gradeRanges' /> </td></tr>
          <tr><th>   <label for="numberOfTeachers" class="control-label">Number Of Teachers</label>             </th><td>  <input class="form-control col-lg-6" data-bind='value: numberOfTeachers' /> </td></tr>
          <tr><th>   <label for="numberOfArtTeachersFullTime" class="control-label">Number Of Art Teachers Full Time</label>               </th><td>  <input class="form-control col-lg-6" data-bind='value: numberOfArtTeachersFullTime' /> </td></tr>
+         <tr><th>   <label for="yearJoined" class="control-label">Year Joined</label>                          </th><td>  <input class="form-control col-lg-6" data-bind="value: yearJoined" /></td></tr>
          <tr><th>   <label for="other" class="control-label">Other</label>                                     </th><td>  <input class="form-control col-lg-6" data-bind='value: other' /> </td></tr>
 </table>
 

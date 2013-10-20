@@ -42,4 +42,27 @@
     width: 10%;
     
 }
-/* .orgHide {display: none} */
+
+footer {padding: 2em;}
+
+ul.hidey, ul.hidey ul
+{
+	list-style:none;
+	margin:0; padding:0;
+	position: relative;
+}
+ul.hidey ul 						
+{ 
+        display:none;
+        position: absolute;
+        text-align: center;
+}
+ul.hidey li:hover > ul 			
+{ 
+	display:block;
+}
+.giveCampDrop {
+    background-color: #CCCCCC;
+    border: #666666 1px solid;
+    width: 100%;
+}

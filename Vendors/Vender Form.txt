@@ -1,0 +1,5 @@
+Determine table overlap and integrate both vender types (with signifying entry) into single table architecture:
+
+Art Organizations + Teaching Artists
+
+Implement into index form table, script map, etc.

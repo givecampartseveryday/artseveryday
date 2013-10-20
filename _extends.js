@@ -204,7 +204,42 @@ var jQuery = jQuery || {};
             );  
             fn()
         }
+       //, KOSearch: function(data, fn){
 
+//    var Model = function( items ) {
+//        var self = this; 
+//        //debugger;
+//        $.extend($.Form.KO.Model, self)
+//        //debugger
+//        $.Form.KO.Model.items = ko.observableArray(
+//            ko.utils.arrayMap(
+//                items
+//                , function( item ) {
+//                    $.Form.KO.Model.Item = $.extend( {}, $.Form.KO.Model.prototypical )
+//                    $.Form.KO.Model.Item.dirty = false
+//                    for( var propName in item ){
+//                        $.Form.KO.Model.prototypical[ $.Table.Map( propName ) ] = null
+//                        $.Form.KO.Model.Item[ $.Table.Map( propName ) ] = item[ propName ] 
+//                    }
+//                    return $.Form.KO.Model.Item
+//                }
+//            )
+//        )
+                
+//        $.Form.KO.Data = data
+//        self.addItem = $.Form.KO.addItem
+//        self.removeItem = $.Form.KO.removeItem
+//        self.save =  $.Form.KO.save
+
+//        $.Form.KO.Model.lastSavedJson = ko.observable('')
+//        //$.Form.KO.Model = this; 
+//    };
+             
+//    ko.applyBindings(
+//        new Model( data ) 
+//    );  
+//    fn()
+//}
     }
     
     $.Table = {
@@ -342,5 +377,7 @@ var jQuery = jQuery || {};
             })
             .fail( function(e) { console.log("error", e) })     
     })
+    
+    
 
 })(jQuery);

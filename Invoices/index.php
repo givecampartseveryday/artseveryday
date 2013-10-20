@@ -6,10 +6,82 @@
 <script src="../_stub.php"></script>
 <link href="../style.css" rel="stylesheet" type="text/css" />
 <script>
+
+
+
     $(function () {
     
-        //debugger;
-        $("#datepicker").datepicker();
+    var url = "https://www.googleapis.com/fusiontables/v1/query";
+var token = $.Hash["access_token"];
+    url += "?access_token=" + token;
+
+
+var sql = "&sql=";
+    sql += "SELECT 'School Name' ";
+
+    sql += "FROM ";
+    sql += $.AEDtables["Schools"];
+
+url += sql;
+console.log(url);
+
+var xhr = $.get(url, 
+     function(response) {
+     $("#schoolSelect").append("<option> Select One </option>");
+         for (var i in response.rows) {
+             //console.log(response.rows[i]);
+
+             $("#schoolSelect").append("<option>"+response.rows[i]+"</option>");
+         }
+     }
+ );
+ console.log(xhr);
+console.log(xhr.responseJSON);
+
+
+     url = "https://www.googleapis.com/fusiontables/v1/query";
+ //token = $.Hash["access_token"];
+    url += "?access_token=" + token;
+
+
+ sql = "&sql=";
+    sql += "SELECT 'Organization Name' ";
+
+    sql += "FROM ";
+    sql += $.AEDtables["Vendors"];
+
+url += sql;
+console.log(url);
+
+ xhr = $.get(url, 
+     function(response) {
+     $("#schoolSelect").append("<option> Select One </option>");
+         for (var i in response.rows) {
+             //console.log(response.rows[i]);
+
+             $("#vendorSelect").append("<option>"+response.rows[i]+"</option>");
+         }
+     }
+ );
+ console.log(xhr);
+console.log(xhr.responseJSON);
+
+
+    $('#btn_search').click(function () {
+
+//    $.FusionSearchTable(
+//            $.AEDtables['Invoices'],
+//            'Invoice Name',
+//            $('#txt_InvoiceNumber').val()
+//            , function (data) {
+//                debugger;
+//                $.Form.KOSetup(data, function () { $.Form.SetupSingle() })
+//            }
+//        )
+
+    event.preventDefault();
+    return false;
+})
         //$.currentNode; 
         //debugger; 
         $.extend(
@@ -69,11 +141,25 @@
         }
         $.Auth(function () {
             $.FusionGetTable(
-                $.Table.Key
+                $.AEDtables['Invoices']
                 , function (data) {
                     $.Form.KO.Model.AEDartforms = ko.observableArray( $.AEDartforms )
+                    
                     $.Form.KO.Model.AEDprogramtypes = ko.observableArray( $.AEDprogramtypes )                
+                    
+                    // Get School Name and School Names from DB
                 
+                    //$.FusionGetTable($.AEDtables['Schools'],function(data){
+                     //var schoolDetails = data.schoolName
+                     //$.Form.KO.Model.Schools=
+                    //debugger;
+                    
+                    //})
+                    //debugger;
+                    
+                    //$.FusionGetTable($.AEDtables['Vendors'],function(data){debugger;})
+                    
+            
                     $.Form.KOSetup(data, function () { $.Form.SetupSingle() })
                 }
             )
@@ -89,10 +175,16 @@
     <div class="container">
 
       <h1>Invoices</h1>
+      
+     
+      
 <div id='InvoicesList' class='col-lg-12'>
         <a href="list.php">List View</a> &nbsp; &nbsp; <a class="openInDrive" href="#">Open in Google Drive</a>
-
+ <br/>
+      <label for="txt_InvoiceNumber">Invoice Number</label> <input type ='text' id="txt_InvoiceNumber"/> <br/>
+      <input type='submit' value="Search by Invoice" id='btn_search' />
       <div  class='invoicesEditor Editor Binder' data-bind="foreach: { data:  $.Form.KO.Model.items }">
+      
       <fieldset class="col-lg-10 editgrid" data-bind=" attr: {'id': 'fieldset_' + rowid}" style="display: none">     
             <legend data-bind='html: invoiceNumber'> </legend>
 
@@ -101,25 +193,26 @@
 <table>
          <tr><th>   <label for="rowid" class="control-label">id</label>                                          </th><td>  <input class="form-control col-lg-6" data-bind='value: rowid' />                       </td></tr>
          <tr><th>   <label for="date" class="control-label">Event Date</label>                              </th><td>  <input class="form-control col-lg-6"  data-bind='value: date' />                   </td></tr>
-         <tr><th>   <label for="schoolName" class="control-label">School Name</label>                       </th><td>  <input class="form-control col-lg-6" data-bind='value: schoolName' />                </td></tr>
+         <tr><th>   <label for="schoolName" class="control-label">School Name</label>                       </th><td>  <input class="form-control col-lg-6" data-bind='value: schoolName' />                
+            <select class='form-control col-lg-6' data-bind='value:schoolName' id='schoolSelect'>
+                
+            </select>
+         </td></tr>
          <tr><th>   <label for="invoiceNumber" class="control-label">Invoice Number</label>                                </th><td>  <input class="form-control col-lg-6" data-bind='value: invoiceNumber' />                    </td></tr>
          <tr><th>   <label for="vendorName" class="control-label">Vendor Name</label>                       </th><td>  <input class="form-control col-lg-6" data-bind='value: vendorName' />                
-         <!-- <select data-bind="options: Vendors"></select>        -->
+         <select class='form-control col-lg-6' data-bind="value: vendorName" id='vendorSelect'>
+         
+         </select>
          </td></tr>
          <tr><th>   <label for="artistName" class="control-label">Artist Name</label>                       </th><td>  <input class="form-control col-lg-6" data-bind='value: artistName' />                </td></tr>
          <tr><th>   <label for="programName" class="control-label">Program Name</label>                                         </th><td>  <input class="form-control col-lg-6" data-bind='value: programName' />                        </td></tr>
-         <tr><th>   <label for="programType" class="control-label">Program Type</label>                                           </th><td>  <input class="form-control col-lg-6" data-bind='value: programType' />
-          <select class="form-control col-lg-6" data-bind="options: programType">
-            <option value="ft">Field Trip</option>
-            <option value="osp">Out of School Performance</option>
-            <option value="trp">Transportation</option>
-            <option value="res">Residency</option>
-            <option value="isp">In-School performance</option>
-            <option value="isw">In-school Workshop</option>
+         <tr><th>   <label for="programType" class="control-label">Program Type</label>                                           </th><td>  <!-- <input class="form-control col-lg-6" data-bind='value: programType' />-->
+          <select class="form-control col-lg-6" data-bind="options: $.Form.KO.Model.AEDprogramtypes, value: programType">
+            
          </select> 
-         <tr><th>   <label for="artFormType" class="control-label">Art Form Type</label>                                       </th><td>  <input class="form-control col-lg-6" data-bind='value: artFormType' />                       
+         <tr><th>   <label for="artFormType" class="control-label">Art Form Type</label>                                       </th><td>  <!-- <input class="form-control col-lg-6" data-bind='value: artFormType' /> -->                    
          
-          <select class="form-control col-lg-6" data-bind="options: $.Form.KO.Model.AEDartforms, selectedOptions: artFormType">
+          <select class="form-control col-lg-6" data-bind="options: $.Form.KO.Model.AEDartforms, value: artFormType">
          </select> 
          
          </td></tr>

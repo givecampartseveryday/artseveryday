@@ -18,14 +18,18 @@
             $.extend( 
                 $.Table
                 , {
-                    Key: $.AEDtables['Donors']
+                    Key: $.AEDtables['Donations']
                     , Map: function( field ){
                         var map = {
-                            firstName: "First Name"
-                            , "First Name": "firstName"
-                            , lastName: "Last Name"  
-                            , "Last Name": "lastName"
+                            donorID: "Donor ID"
+                            , "Donor ID": "donorID"
+                            , donorType: "Donor Type"  
+                            , "Donor Type": "donorType"
+                            , donorFirstName: "Donor First Name"  
+                            , "Donor First Name": "donorFirstName"
                             , preferredName: "Preferred Name"
+                            , donorLastName: "Donor Last Name"  
+                            , "Donor Last Name": "donorLastName"
                             , "Preferred Name": "preferredName"
                             , title: "Title"
                             , "Title": "title"
@@ -38,25 +42,15 @@
                             , state: "State" 
                             , "State": "state"
                             , zip: "ZIP"
-                            , "ZIP": "zip"
+                            , "ZIP": "ZIP"
                             , emailAdress: "Email"
                             , "Email": "emailAdress"
-                            , donorType: "donorType"
-                            , "donorType": "donorType"
+                            , contactType: "Contact Type"
+                            , "Contact Type": "contactType"
+                            , boardMemberName: "Board Member Name"
+                            , "Board Member Name": "boardMemberName"
                             , donationAmountReceived: "Donation Amount Received"
                             , "Donation Amount Received": "donationAmountReceived"
-                            , areBoardMember: "areBoardMember"
-                            , "areBoardMember": "areBoardMember"
-                            , orgName: "Organization Name"
-                            , "Organization Name": "orgName"
-                            , hPhone: "Home Phone"
-                            , "Home Phone": "hPhone"
-                            , cPhone: "Cell Phone"
-                            , "Cell Phone": "cPhone"
-                            , POCfirstName: "POC First Name"
-                            , "POC First Name": "POCfirstName"
-                            , POClastName: "POC Last Name"
-                            , "POC Last Name": "POClastName"
                         }
                         if( field ){
                             return map[field] || field;
@@ -97,7 +91,7 @@
         <button data-bind='click: $root.removeItem'>Delete</button><br/>
 
         <table>
-             <!-- <tr><th>   <label for="rowid" class="control-label">id</label>                                          </th><td>  <input class="form-control col-lg-6" data-bind='value: rowid' />                       </td></tr> -->
+             <tr><th>   <label for="rowid" class="control-label">id</label>                                          </th><td>  <input class="form-control col-lg-6" data-bind='value: rowid' />                       </td></tr>
              <tr><th>   <label for="firstName" class="control-label">First Name</label>                              </th><td>  <input class="form-control col-lg-6" data-bind='value: firstName' />                   </td></tr>
              <tr><th>   <label for="lastName" class="control-label">Last Name</label>                                </th><td>  <input class="form-control col-lg-6" data-bind='value: lastName' />                    </td></tr>
              <tr><th>   <label for="preferredName" class="control-label">Preferred Name</label>                      </th><td>  <input class="form-control col-lg-6" data-bind='value: preferredName' />               </td></tr>
@@ -106,15 +100,11 @@
              <tr><th>   <label for="addressLine2" class="control-label">Address Line 2</label>                       </th><td>  <input class="form-control col-lg-6" data-bind='value: addressLine2' />                </td></tr>
              <tr><th>   <label for="city" class="control-label">City</label>                                         </th><td>  <input class="form-control col-lg-6" data-bind='value: city' />                        </td></tr>
              <tr><th>   <label for="state" class="control-label">State</label>                                       </th><td>  <input class="form-control col-lg-6" data-bind='value: state' />                       </td></tr>
-             <tr><th>   <label for="zip" class="control-label">Zip</label>                                           </th><td>  <input class="form-control col-lg-6" data-bind='value: zip' />                         </td></tr>
+             <tr><th>   <label for="ZIP" class="control-label">Zip</label>                                           </th><td>  <input class="form-control col-lg-6" data-bind='value: ZIP' />                         </td></tr>
              <tr><th>   <label for="emailAddress" class="control-label">Email Address</label>                       </th><td>  <input class="form-control col-lg-6" data-bind='value: emailAdress' />                  </td></tr>
-             <tr><th>   <label for="donorType" class="control-label">Donor Type</label>                          </th><td>  <input class="form-control col-lg-6" data-bind='value: donorType' />                     </td></tr>
+             <tr><th>   <label for="donorType" class="control-label">Contact Type</label>                          </th><td>  <input class="form-control col-lg-6" data-bind='value: donorType' />                     </td></tr>
              <tr><th>   <label for="areBoardMember" class="control-label">Board Member?</label>                 </th><td>  <input class="form-control col-lg-6" data-bind='value: areBoardMember' />                   </td></tr>
-             <tr><th>   <label for="orgName" class="control-label">Organization Name</label>   </th><td>  <input class="form-control col-lg-6" data-bind='value: orgName' />      </td></tr>
-             <tr><th>   <label for="hPhone" class="control-label">Home Phone</label>   </th><td>  <input class="form-control col-lg-6" data-bind='value: hPhone' />      </td></tr>
-             <tr><th>   <label for="cPhone" class="control-label">Cell Phone</label>   </th><td>  <input class="form-control col-lg-6" data-bind='value: cPhone' />      </td></tr>
-             <tr><th>   <label for="POCfirstName" class="control-label">POC First Name</label>   </th><td>  <input class="form-control col-lg-6" data-bind='value: POCfirstName' />      </td></tr>
-             <tr><th>   <label for="POClastName" class="control-label">POC Last Name</label>   </th><td>  <input class="form-control col-lg-6" data-bind='value: POClastName' />      </td></tr>
+             <tr><th>   <label for="donationAmountReceived" class="control-label">Donation Amount Received</label>   </th><td>  <input class="form-control col-lg-6" data-bind='value: donationAmountReceived' />      </td></tr>
       </table>
 
       </fieldset>
