@@ -179,7 +179,8 @@ console.log(xhr.responseJSON);
      
       
 <div id='InvoicesList' class='col-lg-12'>
-        <a href="list.php">List View</a> &nbsp; &nbsp; <a class="openInDrive" href="#">Open in Google Drive</a>
+        <!-- <a href="list.php">List View</a> &nbsp; &nbsp; -->
+        <a class="openInDrive" href="#">Open in Google Drive</a>
  <br/>
       <!-- <label for="txt_InvoiceNumber">Invoice Number</label> <input type ='text' id="txt_InvoiceNumber"/> <br/>
       <input type='submit' value="Search by Invoice" id='btn_search' /> -->

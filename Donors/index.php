@@ -88,7 +88,8 @@
 
       <h1>Donors</h1>
 <div id='DonorsList' class='col-lg-12'>
-        <a href="list.php">List View</a> &nbsp; &nbsp; <a class="openInDrive" href="#">Open in Google Drive</a>
+        <!-- <a href="list.php">List View</a> &nbsp; &nbsp; -->
+        <a class="openInDrive" href="#">Open in Google Drive</a>
 
       <div  class='donorsEditor Editor Binder' data-bind="foreach: { data:  $.Form.KO.Model.items }">
       <fieldset class="col-lg-10 editgrid" data-bind=" attr: {'id': 'fieldset_' + rowid}" style="display:none">     

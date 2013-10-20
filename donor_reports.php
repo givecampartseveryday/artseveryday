@@ -19,7 +19,11 @@ $(function(){
          $( '.token' ).text( token )
     })
 })
-$(function(){})
+$(function(){
+    $('.byDonor').submit(function(ev){
+        ev.preventDefault();
+    })
+})
 </script>
 <body>
 <?php include '_header.html'; ?>
@@ -33,7 +37,7 @@ $(function(){})
 
     
 
-            <form id=byDonor>
+            <form id=byDonor class="byDonor">
                 <label for="artForm">By Art Form</label> <select name=donor id=donor ></select> 
                 <input type="submit" text="Go!" >
             </form>
