@@ -6,10 +6,9 @@ var jQuery = jQuery || {};
 $.Reports
         , spreadSheetTitle: 'AED Test'
         , workSheetTitle: 'Work Sheet'
-        , rowCount: '2'
+        , rowsCount: '2'
         , colsCount: '2'
         , header: ['head1', 'head2']
-        , colno: 1
         , rows: [
                     ['r2c1', 'r2c2' ] 
                     , ['r3c1','r3c2' ] 
@@ -60,9 +59,11 @@ $.Reports
 
             var deferred = []
             //set rowcount, colcount
+
             $.each($.Reports.header, function(i,el){
-                $.Reports.colno = i+1
-                deferred.push( $.post(ssUrl, { sheetHeader: el.toLowerCase(), colNumber: $.Reports.colno } ) )
+                //$.Reports.colno = i+1
+                //debugger; 
+                deferred.push( $.post(ssUrl, { sheetHeader: el.toLowerCase(), colNumber: i+1 } ) )
             })
             return $.when( deferred );
             
@@ -78,10 +79,11 @@ $.Reports
                     xml += '<gsx:' + head +'>' + cell + '</gsx:'+ head +'>'
                 })
                 //debugger; 
-                //deferred.push( $.post(ssUrl, { 'row': xml } ) )
-                $.post(ssUrl, { 'row': xml } ).done(function(data){
-                    console.log('add row', data)
-                })
+                deferred.push( $.post(ssUrl, { 'row': xml } ) )
+                console.log('add row', xml)
+                //$.post(ssUrl, { 'row': xml } ).done(function(data){
+                //    console.log('add row', data)
+                //})
             })
             return $.when( deferred );
         }
@@ -110,12 +112,23 @@ $.Reports
                     $.Reports.wsid =  idUri.substring(istart, idUri.length).replace("/full/", '')
                     
                     console.log('Worksheet added', wsdata) 
-                    
+                    setTimeout(function(){return true},1000)
                    $.Reports.addSheetHeader().done(function(headData){
                        console.log('header added', headData) 
             //       //debugger; 
+                        setTimeout(function(){return true},1000)
 
                         $.Reports.addRows()
+                         //  $.Reports.ssid= null
+                         //  $.Reports.wsid= null
+                         //  $.Reports.token= null 
+                         //  $.Reports.spreadSheetTitle= null
+                         //  $.Reports.workSheetTitle= null
+                         //  $.Reports.rowsCount= null
+                         //  $.Reports.colsCount= null
+                         //  $.Reports.header= null
+                         //  $.Reports.colno= null
+                         //  $.Reports.rows= null
 
                     // $.Reports.addRows().done(function(rowdata){
                     //       console.log('rows added', rowdata) 

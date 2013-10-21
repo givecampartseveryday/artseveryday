@@ -124,6 +124,12 @@
              <tr><th>  </th><td></td></tr>
              <!-- <iframe src='../Donations/index.php' height='300' width='200' /> -->
              
+             <!-- <div  class='donationsEditor Editor Binder' data-bind="foreach: { data:  $.Form.KO.Model.items }">
+                <fieldset class="col-lg-10 editgrid" data-bind=" attr: {'id': 'fieldset_' + rowid}" style="display:none">     
+                
+                </fieldset>
+             </div> -->
+             
       </table>
       <input type="text" class="dirty" data-bind='value: dirty' />
 
