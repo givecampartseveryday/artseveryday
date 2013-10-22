@@ -25,6 +25,8 @@
                             , "First Name": "firstName"
                             , lastName: "Last Name"  
                             , "Last Name": "lastName"
+                            , "MI": "mI"
+                            , "mI": "MI"
                             , preferredName: "Preferred Name"
                             , "Preferred Name": "preferredName"
                             , title: "Title"
@@ -77,7 +79,30 @@
                 )
             });
         });
+
+        $(function(){
+            $.FusionGetTable( $.AEDtables['Donors'], function(data){
+                $.each( data, function(i, row){
+                
+                    var donorKey = row['Last Name'] + '|'+ row['First Name'] + '|'+ row['MI'] 
+                    var donorName = row['Last Name'] + ', ' + row['First Name'] 
+                    var opt = '<option value="'+ donorKey+'">' + donorName + '</option>'
         
+                    if( row['Last Name'].toLowerCase() !== "null" )
+                        $('.donor-choose').append( opt )
+                })
+            })        
+            $('.donor-choose').change(function(ev){
+                var self = $( ev.target )
+                var lookupDonorKey  = self.val()
+
+                $.each($(".donorKey"), function(i, el){ 
+                if( $(el).val() === lookupDonorKey ){
+                        $.Form.Navigate.goto(i) 
+                    }
+                })
+            })
+        })
 </script>
     
 </head>
@@ -89,18 +114,38 @@
       <h1>Donors</h1>
 <div id='DonorsList' class='col-lg-12'>
         <!-- <a href="list.php">List View</a> &nbsp; &nbsp; -->
-        <a class="openInDrive" href="#">Open in Google Drive</a>
+       
 
+                <label for="donor">Go to</label> <select class="donor-choose"></select> &nbsp; &nbsp;  <a class="openInDrive" href="#">Open in Google Drive</a> <br/>
+    <div style="clear: both">  
+          <button data-bind='click: addItem'>Add a donor</button>
+
+            <ul class="navigate">
+        <li class="ui-state-default ui-corner-all">
+            <a class="ui-icon ui-icon-seek-first"></a>
+        </li>  
+        <li class="ui-state-default ui-corner-all">
+            <a class="ui-icon ui-icon-triangle-1-w"></a>
+        </li>      
+        <li class="ui-state-default ui-corner-all">
+            <a class="ui-icon ui-icon-play" href="#"></a>
+        </li>      
+        <li class="ui-state-default ui-corner-all">
+            <a class="ui-icon ui-icon-seek-end"></a>
+        </li>    
+      </ul>
+    </div>                
+    <br/>
       <div  class='donorsEditor Editor Binder' data-bind="foreach: { data:  $.Form.KO.Model.items }">
       <fieldset class="col-lg-10 editgrid" data-bind=" attr: {'id': 'fieldset_' + rowid}" style="display:none">     
             <legend data-bind='html: lastName'> </legend>
 
         <button data-bind='click: $root.removeItem'>Delete</button><br/>
-
+        <input type="hidden" class="donorKey" data-bind="value: lastName + '|' + firstName+ '|' + mI " />
         <table>
              <!-- <tr><th>   <label for="rowid" class="control-label">id</label>                                          </th><td>  <input class="form-control col-lg-6" data-bind='value: rowid' />                       </td></tr> -->
-             <tr><th>   <label for="firstName" class="control-label">First Name</label>                              </th><td>  <input class="form-control col-lg-6" data-bind='value: firstName' />                   </td></tr>
-             <tr><th>   <label for="lastName" class="control-label">Last Name</label>                                </th><td>  <input class="form-control col-lg-6" data-bind='value: lastName' />                    </td></tr>
+             <tr><th>   <label for="firstName" class="control-label">First Name</label>                              </th><td>  <input class="form-control col-lg-6 firstName" data-bind='value: firstName' />                   </td></tr>
+             <tr><th>   <label for="lastName" class="control-label">Last Name</label>                                </th><td>  <input class="form-control col-lg-6 lastName" data-bind='value: lastName' />                    </td></tr>
              <tr><th>   <label for="preferredName" class="control-label">Preferred Name</label>                      </th><td>  <input class="form-control col-lg-6" data-bind='value: preferredName' />               </td></tr>
              <tr><th>   <label for="title" class="control-label">Title</label>                                       </th><td>  <input class="form-control col-lg-6" data-bind='value: title' />                       </td></tr>
              <tr><th>   <label for="addressLine1" class="control-label">Address Line 1</label>                       </th><td>  <input class="form-control col-lg-6" data-bind='value: addressLine1' />                </td></tr>
@@ -137,27 +182,10 @@
 
       </div><!-- donorsEditor databinder -->
 
-
+          <button data-bind='click: save'>Save</button>
     <br />      
 
-    <div style="clear: both">  
-          <button data-bind='click: addItem'>Add a donor</button>
-          <button data-bind='click: save'>Save</button>
-            <ul class="navigate">
-        <li class="ui-state-default ui-corner-all">
-            <a class="ui-icon ui-icon-seek-first"></a>
-        </li>  
-        <li class="ui-state-default ui-corner-all">
-            <a class="ui-icon ui-icon-triangle-1-w"></a>
-        </li>      
-        <li class="ui-state-default ui-corner-all">
-            <a class="ui-icon ui-icon-play" href="#"></a>
-        </li>      
-        <li class="ui-state-default ui-corner-all">
-            <a class="ui-icon ui-icon-seek-end"></a>
-        </li>    
-      </ul>
-    </div>
+
     
     </div><!-- DonorsList -->
     </div><!-- container -->
