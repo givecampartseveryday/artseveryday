@@ -19,6 +19,12 @@ $(function(){
          $( '.token' ).text( token )
     })
 })
+
+/*
+function noSpace(val){
+    return val.toString().replace(/\s+/g, "")
+}
+*/
 $(function(){
 
     $.FusionGetTable( $.AEDtables['Donations'], function(data){

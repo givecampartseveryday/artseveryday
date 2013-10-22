@@ -4,6 +4,7 @@
 <script src="../_extends.js"></script>
 <script src="../_authenticate.js"></script>
 <script src="../_stub.php"></script>
+<script src="../_reports.js"></script>
 <link href="../style.css" rel="stylesheet" type="text/css" />
 <script>
         $(function(){
@@ -74,7 +75,43 @@
                 $.FusionGetTable( 
                     $.Table.Key
                     , function(data){ 
-                        $.Form.KOSetup(data, function(){$.Form.SetupSingle()}) 
+                        $.Form.KOSetup(data, function(){ 
+                            $.Form.SetupSingle()
+                            $('.donorKey').each(function(i,el){
+                                var donorKey = $(el).val() 
+                                console.log("Set", donorKey)
+                                $(el).next().addClass( donorKey ).hide()
+
+                            }) 
+                            $.FusionGetTable( $.AEDtables['Donations'], function(data){
+                                $.each( data, function(i, row){
+                                
+                                    var donorKey = row['Donor Last Name'].noSpace() + '-'+ row['Donor First Name'].noSpace() + '-'+ row['Donor MI'].noSpace() 
+                                    console.log("Get", donorKey)
+                                    $('.'+donorKey).show()
+                                })
+                            })                                 
+                            $('.byDonor').click(function(ev){
+                                ev.preventDefault();
+                                self = $(ev.target)
+                                var donorKey = self.attr('class').replace('byDonor ', '')
+                                var header = ['Donor Last Name', 'Donor First Name', 'Check Amount', 'Check Received'] 
+                                var table = $.AEDtables["Donations"]
+                            
+                                var donorNameArray= donorKey.split('-')
+                                var spreadSheetTitle= 'AED Donations by Donor'
+                                var workSheetTitle= 'Donor {0} {1}'.format(donorNameArray[0], donorNameArray[1])
+                            
+                                var sql = " WHERE "
+                                sql += "'Donor Last Name' = '{0}'".format(donorNameArray[0].replace(/\_/g, ' ') )
+                                sql += "AND 'Donor First Name' = '{0}'".format(donorNameArray[1].replace(/\_/g, ' ') )
+                                sql += "AND 'Donor MI' = '{0}'".format(donorNameArray[2].replace(/\_/g, ' ') )
+                            
+                                $.Reports.makeThisReport( table, spreadSheetTitle, workSheetTitle, header, sql )
+                                 
+                            })                             
+                            
+                        }) 
                     } 
                 )
             });
@@ -84,14 +121,17 @@
             $.FusionGetTable( $.AEDtables['Donors'], function(data){
                 $.each( data, function(i, row){
                 
-                    var donorKey = row['Last Name'] + '|'+ row['First Name'] + '|'+ row['MI'] 
-                    var donorName = row['Last Name'] + ', ' + row['First Name'] 
+                    var donorKey = row['Last Name'].noSpace() + '-'+ row['First Name'].noSpace() + '-'+ row['MI'].noSpace() 
+                    var donorName = row['Last Name']+ ', ' + row['First Name']
                     var opt = '<option value="'+ donorKey+'">' + donorName + '</option>'
         
                     if( row['Last Name'].toLowerCase() !== "null" )
                         $('.donor-choose').append( opt )
                 })
             })        
+    
+
+
             $('.donor-choose').change(function(ev){
                 var self = $( ev.target )
                 var lookupDonorKey  = self.val()
@@ -102,6 +142,11 @@
                     }
                 })
             })
+            
+            
+
+    
+           
         })
 </script>
     
@@ -116,7 +161,7 @@
         <!-- <a href="list.php">List View</a> &nbsp; &nbsp; -->
        
 
-                <label for="donor">Go to</label> <select class="donor-choose"></select> &nbsp; &nbsp;  <a class="openInDrive" href="#">Open in Google Drive</a> <br/>
+                <label for="donor">Go to</label> <select class="donor-choose"></select> &nbsp; &nbsp;  <a class="openInDrive" href="#">Open in Google Drive</a>  <br/>
     <div style="clear: both">  
           <button data-bind='click: addItem'>Add a donor</button>
 
@@ -140,8 +185,10 @@
       <fieldset class="col-lg-10 editgrid" data-bind=" attr: {'id': 'fieldset_' + rowid}" style="display:none">     
             <legend data-bind='html: lastName'> </legend>
 
-        <button data-bind='click: $root.removeItem'>Delete</button><br/>
-        <input type="hidden" class="donorKey" data-bind="value: lastName + '|' + firstName+ '|' + mI " />
+        <button data-bind='click: $root.removeItem'>Delete</button> 
+        <input type="hidden" class="donorKey" data-bind="value: lastName.noSpace() + '-' + firstName.noSpace() + '-' + mI.noSpace() " />
+        <a class="byDonor" href="#">Make Donor Report</a><br/>
+        
         <table>
              <!-- <tr><th>   <label for="rowid" class="control-label">id</label>                                          </th><td>  <input class="form-control col-lg-6" data-bind='value: rowid' />                       </td></tr> -->
              <tr><th>   <label for="firstName" class="control-label">First Name</label>                              </th><td>  <input class="form-control col-lg-6 firstName" data-bind='value: firstName' />                   </td></tr>

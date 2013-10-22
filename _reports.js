@@ -44,14 +44,14 @@ $.Reports
                 } )              
         }
         , createWorkSheet: function(){
-            ssUrl = '_worksheet.php?token={0}&ssid={1}'.format($.Reports.token, $.Reports.ssid)
+            ssUrl = '../_worksheet.php?token={0}&ssid={1}'.format($.Reports.token, $.Reports.ssid)
             // return webContent = $.get(ssUrl )                      
             //console.log('Create Worksheet', $.Reports.workSheetTitle, $.Reports.rowsCount,$.Reports.colsCount  )
             //debugger; 
             return webContent = $.post( ssUrl, { workSheet: $.Reports.workSheetTitle, rows: $.Reports.rowsCount, cols: $.Reports.colsCount } )      
         }
         , addSheetHeader: function(){
-            ssUrl = '_worksheetHeader.php?token={0}&ssid={1}&wsid={2}'.format($.Reports.token, $.Reports.ssid, $.Reports.wsid)
+            ssUrl = '../_worksheetHeader.php?token={0}&ssid={1}&wsid={2}'.format($.Reports.token, $.Reports.ssid, $.Reports.wsid)
             // return webContent = $.get(ssUrl )    
 
             //console.log('Create Header', $.Reports.token, $.Reports.ssid, $.Reports.wsid )
@@ -69,7 +69,7 @@ $.Reports
             
         }        
         , addRows: function(){
-            ssUrl = '_worksheetRows.php?token={0}&ssid={1}&wsid={2}'.format($.Reports.token, $.Reports.ssid, $.Reports.wsid)
+            ssUrl = '../_worksheetRows.php?token={0}&ssid={1}&wsid={2}'.format($.Reports.token, $.Reports.ssid, $.Reports.wsid)
             //debugger; 
             var deferred = []
             $.each($.Reports.rows, function(rowIndex, row){
@@ -87,6 +87,31 @@ $.Reports
             })
             return $.when( deferred );
         }
+        , makeThisReport: function(table, spreadSheetTitle, workSheetTitle, header, where){
+    
+            var url = "https://www.googleapis.com/fusiontables/v1/query"
+            url += "?access_token={0}".format($.Hash["access_token"]) 
+        
+            var sql = "SELECT  '" + header.join("','")+ "' "
+            sql += "FROM " + table
+            sql += where
+            url += "&sql=" + sql
+
+            var xhr = $.get(url)
+            .done(function(data){
+
+                var query = {
+                    spreadSheetTitle: spreadSheetTitle
+                    , workSheetTitle: workSheetTitle
+                    , rowsCount: data.rows.length +1
+                    , colsCount: data.columns.length
+                    , header:  header.map(function(el){return el.replace(/\s+/g, '').toLowerCase()})
+                    , rows: data.rows      
+                }
+                $.extend( $.Reports, query ) 
+                $.Reports.makeReport();    
+            })
+        }        
         , makeReport: function(){
             $.Reports.token = $.Hash["access_token"]
             var token = $.Reports.token

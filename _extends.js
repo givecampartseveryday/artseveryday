@@ -21,6 +21,12 @@ var jQuery = jQuery || {};
 	        }
 	        return arguments[0]
 	        };
+	        //"a a b".noSpace()
+	    if (! String.prototype.noSpace ) 
+	        String.prototype.noSpace = function(){
+	            var txt = this
+	            return txt.toString().replace(/\s+/g, '_')
+	        };
 
     $.Form = { 
         $currentNode: null 
