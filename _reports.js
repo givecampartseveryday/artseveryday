@@ -169,6 +169,7 @@ $.Reports
     }
 })(jQuery);
 
+/*
 $(document).ready(function(){
     var artForms = $.AEDartforms;
     var programTypes = $.AEDprogramtypes;
@@ -206,10 +207,11 @@ $(document).ready(function(){
             }
         }
     );
-    console.log(xhr);
+    //console.log(xhr);
     //console.log(xhr.responseJSON);
     
 })
+*/
 
 function objectSerialize(form) {
     var o = {};
@@ -230,7 +232,15 @@ function objectSerialize(form) {
 function packJSONforInvoiceSpreadsheet (json, reportType, start, end) {
     var title = "Invoices for " + reportType + ' over ' + start + '-' + end;
     var worksheetTitle = "Invoices for " + reportType;
-    var rows = json.rows.length;
+    
+    console.log("json.rows = " + json.rows, json.rows !== null);
+    console.log(json);
+    if (typeof(json.rows) != 'undefined') {
+        var rows = json.rows.length;
+    } else {
+        alert("The report of " + reportType + " from " + start + " to " + end + " contains no data.");
+        return;
+    }
     var cols = json.columns.length;
     var header = json.columns;
     var data = []
@@ -314,15 +324,23 @@ function generateJSONByArtForm(inputs) {
     
         function(response) {
             var packed = packJSONforInvoiceSpreadsheet(response, inputs["artForm"], inputs["start"], inputs["end"]);
+            
+            //If `packed` is not undefined, it means the data selection contains some data. packJSONforInvoiceSpreadsheet
+            //will return a correctly-packed JSON object if data is available. If it isn't, it simply returns undefined.
+            //packJSONforInvoiceSpreadsheet will alert the user with an alert() if no data is available.
+            if (typeof(packed) != 'undefined') {
 
-            $.Reports.spreadSheetTitle = packed.spreadSheetTitle
-            $.Reports.workSheetTitle = packed.worksheetTitle
-            $.Reports.rowsCount = packed.rowsCount
-            $.Reports.colsCount = packed.colsCount
-            $.Reports.header = packed.header
-            $.Reports.rows = packed.rows
-       
-            $.Reports.makeReport();
+                $.Reports.spreadSheetTitle = packed.spreadSheetTitle
+                $.Reports.workSheetTitle = packed.worksheetTitle
+                $.Reports.rowsCount = packed.rowsCount
+                $.Reports.colsCount = packed.colsCount
+                $.Reports.header = packed.header
+                $.Reports.rows = packed.rows
+           
+                $.Reports.makeReport();
+            } else {
+                return;
+            }
     });
 }
 
@@ -353,14 +371,19 @@ function generateJSONByProgramType(inputs) {
         function(response) {
             var packed = packJSONforInvoiceSpreadsheet(response, inputs["programType"], inputs["start"], inputs["end"]);
 
-            $.Reports.spreadSheetTitle = packed.spreadSheetTitle
-            $.Reports.workSheetTitle = packed.worksheetTitle
-            $.Reports.rowsCount = packed.rowsCount
-            $.Reports.colsCount = packed.colsCount
-            $.Reports.header = packed.header
-            $.Reports.rows = packed.rows
-       
-            $.Reports.makeReport();
+            if (typeof(packed) != 'undefined') {
+
+                $.Reports.spreadSheetTitle = packed.spreadSheetTitle
+                $.Reports.workSheetTitle = packed.worksheetTitle
+                $.Reports.rowsCount = packed.rowsCount
+                $.Reports.colsCount = packed.colsCount
+                $.Reports.header = packed.header
+                $.Reports.rows = packed.rows
+           
+                $.Reports.makeReport();
+            } else {
+                return;
+            }
     });
 }
 
@@ -392,14 +415,19 @@ function generateJSONBySchoolName(inputs) {
         function(response) {
             var packed = packJSONforInvoiceSpreadsheet(response, inputs["school"], inputs["start"], inputs["end"]);
 
-            $.Reports.spreadSheetTitle = packed.spreadSheetTitle
-            $.Reports.workSheetTitle = packed.worksheetTitle
-            $.Reports.rowsCount = packed.rowsCount
-            $.Reports.colsCount = packed.colsCount
-            $.Reports.header = packed.header
-            $.Reports.rows = packed.rows
-       
-            $.Reports.makeReport();
+            if (typeof(packed) != 'undefined') {
+
+                $.Reports.spreadSheetTitle = packed.spreadSheetTitle
+                $.Reports.workSheetTitle = packed.worksheetTitle
+                $.Reports.rowsCount = packed.rowsCount
+                $.Reports.colsCount = packed.colsCount
+                $.Reports.header = packed.header
+                $.Reports.rows = packed.rows
+           
+                $.Reports.makeReport();
+            } else {
+                return;
+            }
         
     });
 }

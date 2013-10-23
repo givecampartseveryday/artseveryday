@@ -4,6 +4,7 @@
 <script src="_extends.js"></script>
 <script src="_authenticate.js"></script>
 <script src="_reports.js"></script>
+<script src="_stub.php"></script>
 <link href="style.css" rel="stylesheet" type="text/css" />
 <script>
 $(function(){

@@ -41,7 +41,6 @@
     var xhr = $.get(url, 
         function(response) {
             for (var i in response.rows) {
-                console.log(response.rows[i])
                 $("#schoolSelect").append("<option>"+response.rows[i]+"</option>");
                 $("#schoolSelect2").append("<option>"+response.rows[i]+"</option>");
             }
@@ -65,7 +64,7 @@
     
     xhr = $.get(url, 
         function(response) {
-        $("#schoolSelect").append("<option> Select One </option>");
+        $("#vendorSelect").append("<option> Select One </option>");
         for (var i in response.rows) {
              //console.log(response.rows[i]);
          $("#vendorSelect").append("<option>"+response.rows[i]+"</option>");
