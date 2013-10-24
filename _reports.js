@@ -1,4 +1,3 @@
-
 var jQuery = jQuery || {}; 
 
 
@@ -100,7 +99,7 @@ $.Reports
             var xhr = $.get(url)
             .done(function(data){
                 if (typeof(data.rows) === 'undefined') {
-                    return faslse; 
+                    return false; 
                 }
                 var query = {
                     spreadSheetTitle: spreadSheetTitle
