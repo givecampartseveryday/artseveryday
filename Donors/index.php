@@ -79,15 +79,13 @@
                             $.Form.SetupSingle()
                             $('.donorKey').each(function(i,el){
                                 var donorKey = $(el).val() 
-                                console.log("Set", donorKey)
+                                //console.log('Set', donorKey)
                                 $(el).next().addClass( donorKey ).hide()
-
                             }) 
                             $.FusionGetTable( $.AEDtables['Donations'], function(data){
                                 $.each( data, function(i, row){
-                                
                                     var donorKey = row['Donor Last Name'].noSpace() + '-'+ row['Donor First Name'].noSpace() + '-'+ row['Donor MI'].noSpace() 
-                                    console.log("Get", donorKey)
+                                    //console.log('Get', donorKey)
                                     $('.'+donorKey).show()
                                 })
                             })                                 
@@ -96,7 +94,7 @@
                                 self = $(ev.target)
                                 var donorKey = self.attr('class').replace('byDonor ', '')
                                 var header = ['Donor Last Name', 'Donor First Name', 'Check Amount', 'Check Received'] 
-                                var table = $.AEDtables["Donations"]
+                                var table = $.AEDtables['Donations']
                             
                                 var donorNameArray= donorKey.split('-')
                                 var spreadSheetTitle= 'AED Donations by Donor'
@@ -108,12 +106,9 @@
                                 sql += "AND 'Donor MI' = '{0}'".format(donorNameArray[2].replace(/\_/g, ' ') )
                             
                                 $.Reports.makeThisReport( table, spreadSheetTitle, workSheetTitle, header, sql )
-                                 
                             })                             
-                            
-                        }) 
-                    } 
-                )
+                    }) 
+                })
             });
         });
 
