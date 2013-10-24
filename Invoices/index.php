@@ -35,12 +35,15 @@
         sql += "FROM ";
         sql += $.AEDtables["Schools"];
         
+        sql += " ORDER BY 'School Name' ASC"
+        
     url += sql;
     console.log(url);
     
     var xhr = $.get(url, 
         function(response) {
             for (var i in response.rows) {
+                console.log(response.rows[i]);
                 $("#schoolSelect").append("<option>"+response.rows[i]+"</option>");
                 $("#schoolSelect2").append("<option>"+response.rows[i]+"</option>");
             }
@@ -59,22 +62,24 @@
     sql += "FROM ";
     sql += $.AEDtables["Vendors"];
     
+    sql += " ORDER BY 'Organization Name'"
+    
     url += sql;
     console.log(url);
     
     xhr = $.get(url, 
         function(response) {
-        $("#vendorSelect").append("<option> Select One </option>");
-        for (var i in response.rows) {
-             //console.log(response.rows[i]);
-         $("#vendorSelect").append("<option>"+response.rows[i]+"</option>");
-        }
+            $("#vendorSelect").append("<option> Select One </option>");
+            for (var i in response.rows) {
+                 console.log(response.rows[i]);
+                $("#vendorSelect").append("<option>"+response.rows[i]+"</option>");
+            }
         }
     ) 
 
 //});
     
-    
+        /*
         url = "https://www.googleapis.com/fusiontables/v1/query";
         token = $.Hash["access_token"];
         url += "?access_token=" + token;
@@ -99,6 +104,7 @@
             }
         }
         )
+        */
     });
     
 

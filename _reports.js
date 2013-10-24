@@ -270,7 +270,13 @@ function packJSONforInvoiceSpreadsheet (json, reportType, start, end) {
 function packJSONforDonationSpreadsheet (json, reportType, start, end) {
     var title = "Donations for " + reportType + ' over ' + start + '-' + end;
     var worksheetTitle = "Donations for " + reportType;
-    var rows = json.rows.length;
+    
+    if (typeof(data.rows) != 'undefined') {
+        var rows = json.rows.length;
+    } else {
+        alert("The report of " + reportType + " from " + start + " to " + end + " contains no data.");
+    }
+    
     var cols = json.columns.length;
     var header = json.columns;
     var data = []
