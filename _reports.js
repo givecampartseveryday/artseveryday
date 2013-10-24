@@ -99,7 +99,9 @@ $.Reports
 
             var xhr = $.get(url)
             .done(function(data){
-
+                if (typeof(data.rows) === 'undefined') {
+                    return faslse; 
+                }
                 var query = {
                     spreadSheetTitle: spreadSheetTitle
                     , workSheetTitle: workSheetTitle
