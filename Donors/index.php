@@ -10,6 +10,15 @@
         $(function(){
             //$.currentNode; 
             //debugger; 
+            
+            $.Form.Navigate.onNavComplete = function(){
+                //alert('Moved')
+                //debugger; 
+                $.Form.$currentNode
+                var donorKey = $('.donorKey', $.Form.$currentNode).val()
+                $('.donationsList').attr('src', 'donations.php#DonorKey=' + donorKey +'&access_token=' +  $.Hash.access_token  )
+            }            
+            
             $.extend( 
                 $.Form
                 , {
@@ -124,7 +133,6 @@
                         $('.donor-choose').append( opt )
                 })
             })        
-    
 
 
             $('.donor-choose').change(function(ev){
@@ -137,6 +145,7 @@
                     }
                 })
             })
+            //
             
             
 
@@ -180,43 +189,67 @@
       <fieldset class="col-lg-10 editgrid" data-bind=" attr: {'id': 'fieldset_' + rowid}" style="display:none">     
             <legend data-bind='html: lastName'> </legend>
 
-        <button data-bind='click: $root.removeItem'>Delete</button> 
+        <button data-bind='click: $root.removeItem'>Delete</button> *The donotions report button is only display if the donor has entries in donations. 
+        
         <input type="hidden" class="donorKey" data-bind="value: lastName.noSpace() + '-' + firstName.noSpace() + '-' + mI.noSpace() " />
         <a class="byDonor" href="#">Make Donor Report</a><br/>
         
         <table>
              <!-- <tr><th>   <label for="rowid" class="control-label">id</label>                                          </th><td>  <input class="form-control col-lg-6" data-bind='value: rowid' />                       </td></tr> -->
-             <tr><th>   <label for="firstName" class="control-label">First Name</label>                              </th><td>  <input class="form-control col-lg-6 firstName" data-bind='value: firstName' />                   </td></tr>
-             <tr><th>   <label for="lastName" class="control-label">Last Name</label>                                </th><td>  <input class="form-control col-lg-6 lastName" data-bind='value: lastName' />                    </td></tr>
-             <tr><th>   <label for="preferredName" class="control-label">Preferred Name</label>                      </th><td>  <input class="form-control col-lg-6" data-bind='value: preferredName' />               </td></tr>
-             <tr><th>   <label for="title" class="control-label">Title</label>                                       </th><td>  <input class="form-control col-lg-6" data-bind='value: title' />                       </td></tr>
-             <tr><th>   <label for="addressLine1" class="control-label">Address Line 1</label>                       </th><td>  <input class="form-control col-lg-6" data-bind='value: addressLine1' />                </td></tr>
-             <tr><th>   <label for="addressLine2" class="control-label">Address Line 2</label>                       </th><td>  <input class="form-control col-lg-6" data-bind='value: addressLine2' />                </td></tr>
-             <tr><th>   <label for="city" class="control-label">City</label>                                         </th><td>  <input class="form-control col-lg-6" data-bind='value: city' />                        </td></tr>
-             <tr><th>   <label for="state" class="control-label">State</label>                                       </th><td>  <input class="form-control col-lg-6" data-bind='value: state' />                       </td></tr>
-             <tr><th>   <label for="zip" class="control-label">Zip</label>                                           </th><td>  <input class="form-control col-lg-6" data-bind='value: zip' />                         </td></tr>
-             <tr><th>   <label for="emailAddress" class="control-label">Email Address</label>                       </th><td>  <input class="form-control col-lg-6" data-bind='value: emailAdress' />                  </td></tr>
-             <tr><th>   <label for="donorType" class="control-label">Donor Type</label>                          </th><td>  <select class="form-control col-lg-6" data-bind='value: donorType' />                   
-                                                                                                                                    <option value="ind">Individual</option>
-                                                                                                                                    <option value="org">Foundation</option>
-                                                                                                                                    <option value="gov">Government</option>
-                                                                                                                            </select>                                                                                                                                                 </td></tr>
-             <tr><th>   <label for="areBoardMember" class="control-label">Board Member?</label>                 </th><td>  <input type="checkbox" class="form-control col-lg-6" data-bind='value: areBoardMember' />                   </td></tr>
-             <tr><th>   <label for="orgName" class="control-label">Organization Name</label>   </th><td>  <input class="form-control col-lg-6" data-bind='value: orgName' />      </td></tr>
+             <tr>
+                <th>   <label for="firstName" class="control-label">First Name</label>                              </th>
+                <th>   <label for="lastName" class="control-label">Last Name</label>                                </th>
+                <th>   <label for="preferredName" class="control-label">Preferred Name</label>                      </th>
+                <th>   <label for="title" class="control-label">Title</label>                                       </th>             
+             </tr>
+             <tr>
+                <td>  <input class="form-control col-lg-6 firstName" data-bind='value: firstName' /></td>
+                <td>  <input class="form-control col-lg-6 lastName" data-bind='value: lastName' />  </td>
+                <td>  <input class="form-control col-lg-6" data-bind='value: preferredName' />      </td>
+                <td>  <input class="form-control col-lg-6" data-bind='value: title' />              </td>        
+             </tr>
+             <tr><th>   <label for="addressLine1" class="control-label">Address Line 1</label>                       </th>
+             <td  colspan="3">  <input class="form-control col-lg-12" data-bind='value: addressLine1' />                </td></tr>
+             <tr><th>   <label for="addressLine2" class="control-label">Address Line 2</label>                       </th>
+             <td  colspan="3">  <input class="form-control col-lg-12" data-bind='value: addressLine2' />                </td></tr>
+             
+            <tr>
+                <th colspan="2">   <label for="city" class="control-label">City</label>                                         </th>
+                <th>   <label for="state" class="control-label">State</label>                                       </th>
+                <th>   <label for="zip" class="control-label">Zip</label>                                           </th>
+            </tr>             
+             <tr>
+                 <td  colspan="2">  <input class="form-control col-lg-6" data-bind='value: city' />                        </td>
+                 <td>  <input class="form-control col-lg-6" data-bind='value: state' />                       </td>
+                 <td>  <input class="form-control col-lg-6" data-bind='value: zip' />                         </td>
+             </tr>
+             <tr><th>   <label for="emailAddress" class="control-label">Email Address</label>                       </th>
+             <td colspan="3">  <input class="form-control col-lg-6" data-bind='value: emailAdress' />                  </td></tr>
+             <tr><th>   <label for="donorType" class="control-label">Donor Type</label>                          </th><td>  
+                     <select class="form-control col-lg-6" data-bind='value: donorType' />                   
+                            <option value="ind">Individual</option>
+                            <option value="org">Foundation</option>
+                            <option value="gov">Government</option>
+                    </select>                                                                                                                                                
+                    </td>
+             <th>   <label for="areBoardMember" class="control-label">Board Member?</label>                 </th><td>  <input type="checkbox" class="form-control col-lg-6" data-bind='value: areBoardMember' />                   </td></tr>
+             <tr><th>   <label for="orgName" class="control-label">Organization Name</label>   </th>
+             <td colspan="3">  <input class="form-control col-lg-6" data-bind='value: orgName' />      </td></tr>
              <tr><th>   <label for="hPhone" class="control-label">Home Phone</label>   </th><td>  <input class="form-control col-lg-6" data-bind='value: hPhone' />      </td></tr>
              <tr><th>   <label for="cPhone" class="control-label">Cell Phone</label>   </th><td>  <input class="form-control col-lg-6" data-bind='value: cPhone' />      </td></tr>
              <tr><th>   <label for="POCfirstName" class="control-label">POC First Name</label>   </th><td>  <input class="form-control col-lg-6" data-bind='value: POCfirstName' />      </td></tr>
              <tr><th>   <label for="POClastName" class="control-label">POC Last Name</label>   </th><td>  <input class="form-control col-lg-6" data-bind='value: POClastName' />      </td></tr>
              <tr><th>   <label for="donationAmountReceived" class="control-label">Donation Amount Received</label>   </th><td>  <input class="form-control col-lg-6" data-bind='value: donationAmountReceived' />      </td></tr>
              <tr><th>  </th><td></td></tr>
-             <!-- <iframe src='../Donations/index.php' height='300' width='200' /> -->
+             
+             
+            
              
              <!-- <div  class='donationsEditor Editor Binder' data-bind="foreach: { data:  $.Form.KO.Model.items }">
                 <fieldset class="col-lg-10 editgrid" data-bind=" attr: {'id': 'fieldset_' + rowid}" style="display:none">     
                 
                 </fieldset>
              </div> -->
-             
       </table>
       <input type="text" class="dirty" data-bind='value: dirty' />
 
@@ -226,9 +259,9 @@
 
           <button data-bind='click: save'>Save</button>
     <br />      
+<iframe class='donationsList' src='/blank.html' height='400' width='600' />
 
 
-    
     </div><!-- DonorsList -->
     </div><!-- container -->
     

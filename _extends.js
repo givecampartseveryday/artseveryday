@@ -73,36 +73,44 @@ var jQuery = jQuery || {};
             }
         }
         , Navigate: {
-            goto: function(i){
+            goto: function(i, fn){
                 $.Form.$currentNode = $('.Editor fieldset').eq(i)
                 $('.Editor fieldset').hide()
                 $.Form.$currentNode.show()
+                $.Form.Navigate.onNavComplete(fn)
             }
-            , forwards: function(){
+            , forwards: function(fn){
                 //debugger; 
                 if( $.Form.$currentNode.next().length === 0)
                     return false
                 $.Form.$currentNode = $.Form.$currentNode.next()
                 $('.Editor fieldset').hide()
                 $.Form.$currentNode.show()
+                $.Form.Navigate.onNavComplete(fn)
             }
-            , backwards: function(){
+            , backwards: function(fn){
                 if( $.Form.$currentNode.prev().length === 0)
                     return false
                 $.Form.$currentNode = $.Form.$currentNode.prev()
                 $('.Editor fieldset').hide()
                 $.Form.$currentNode.show()
+                $.Form.Navigate.onNavComplete(fn)
             }
-            , first: function(){
+            , first: function(fn){
                 $.Form.$currentNode = $('.Editor fieldset').first()
                 $('.Editor fieldset').hide()
                 $.Form.$currentNode.show()
+                $.Form.Navigate.onNavComplete(fn)
             }
-            , last: function(){
+            , last: function(fn){
                 $.Form.$currentNode = $('.Editor fieldset').last()
                 $('.Editor fieldset').hide()
                 $.Form.$currentNode.show()
-            }            
+                $.Form.Navigate.onNavComplete(fn)
+            } 
+            , onNavComplete: function(fn){
+                if ( typeof fn === 'function' ){ fn() }
+            }
         }
         , doDirty: function(e){
             //debugger; 
@@ -112,6 +120,7 @@ var jQuery = jQuery || {};
                 $('.dirty', $parent).val( 'updated' ).change()            
         }
         , Setup: function(){
+            $.Form.Navigate.first()
             window.onbeforeunload = function(e) {
                 var isDirty = false
                 $.each( 
@@ -251,18 +260,6 @@ var jQuery = jQuery || {};
     
     $.Table = {
     }
-    $.Hash = (function(a) {
-            if (a == "") return {};
-            var b = {};
-            for (var i = 0; i < a.length; ++i)
-            {
-                var p=a[i].split('=');
-                if (p.length != 2) continue;
-                b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
-            }
-            return b;
-        })(window.location.hash.substr(1).split('&')) //IEFE
-
     $.FusionUpdateRow = function(table, row, map, message){
         var retval = 'empty'
         var token = $.Hash["access_token"]

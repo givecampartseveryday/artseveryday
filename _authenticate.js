@@ -4,6 +4,16 @@
 var jQuery = jQuery || {}; 
 (function($) {
 /*If no access token is in the QueryString then go the to google page. telling the google page what page to return to.*/
+    $.Hash = (function(a) {
+            var b = {};
+            for (var i = 0; i < a.length; ++i)
+            {
+                var p=a[i].split('=');
+                if (p.length != 2) continue;
+                b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
+            }
+            return b;
+        })(window.location.hash.substr(1).split('&')) //IEFE
     $.Auth = (function( callback ) { 
         var token = $.Hash.access_token
         if(! token  ){
@@ -21,8 +31,10 @@ var jQuery = jQuery || {};
         }else{        
             callback();    
         }
-        
     })
+    $.QueryString = function (sVar) {
+          return decodeURI(window.location.search.replace(new RegExp("^(?:.*[&\\?]" + encodeURI(sVar).replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));
+        }
     $.LogOut = (function(){
         var success = false
         var url = 'https://accounts.google.com/Logout?continue='
@@ -35,10 +47,12 @@ $(function(){
      $('.logout').click(function(e){
             $.LogOut()
      })
+    /*
     $.Auth(function(){ 
          var token = $.Hash.access_token
          $( '.token' ).text( token )
          //debugger; 
          //$.Reports.List()
     })
+    */
 })
