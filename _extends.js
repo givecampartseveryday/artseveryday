@@ -312,7 +312,7 @@ var jQuery = jQuery || {};
         var url = tableLocation + '&sql=' + sql
         var xhr = $.post( url ).done(function(response){
             rowid = ''
-            debugger; 
+            //debugger; 
             retval = "DATA Inserted \n \n" +  JSON.stringify (response )
         }).fail(function(response){
             retval = "FAILED \n \n" +  JSON.stringify (response )
@@ -322,7 +322,7 @@ var jQuery = jQuery || {};
     };
     
     $.FusionDeleteRow = function(table, row) {
-        debugger;
+        //debugger;
         var retval = 'empty'
         var rowid = row["rowid"]
         var token = $.Hash["access_token"]
@@ -332,13 +332,13 @@ var jQuery = jQuery || {};
         var sql = "DELETE FROM " + table;
             sql += " WHERE ROWID = ";
             sql += ("'" + rowid + "'");
-        debugger;
+        //debugger;
         
         var url = tableLocation + "&sql=" + sql   
 
         var xhr = $.post(url).done(function(response) {
             rowid = ''
-            debugger;
+            //debugger;
             retval = "DATA deleted \n \n" + JSON.stringify(response);
         }).fail(function(response) {
             retval = "FAILED \n \n" + JSON.stringify(response);
@@ -347,7 +347,9 @@ var jQuery = jQuery || {};
         return rowid;
     }
     
-    $.FusionGetTable = (function( table, callback ) { 
+    $.FusionGetTable = (function( table, callback, where ) { 
+           
+
         var token = $.Hash["access_token"]
 
         console.log('authorized', token)
@@ -363,20 +365,24 @@ var jQuery = jQuery || {};
                 console.log('FusionGetTable Succeeded', FusionTableMetaData)
                 var sql = "SELECT ROWID, '" + FusionTableMetaData.columns.join("', '") + "' FROM "
             sql += table 
+            if( where ){ sql += where } 
                 var xhr = $.get(  tableLocation + '&sql=' + sql )
                     .done( function( FusionTableData ) {
+                        // debugger; 
                         console.log('FusionGetTable Succeeded', FusionTableData)
                         //debugger; 
                         //Map Fusion Table Data to a more standard JSON format.
-                        var KOObjects = $.map( FusionTableData.rows, function(row){ 
-                             var object = {}
-                              $.each(row, function(i, el){ 
-                                var column = FusionTableData.columns[i]
-                                object[column] = el 
+                        if(FusionTableData.rows ){
+                            var KOObjects = $.map( FusionTableData.rows, function(row){ 
+                                 var object = {}
+                                  $.each(row, function(i, el){ 
+                                    var column = FusionTableData.columns[i]
+                                    object[column] = el 
+                                })
+                                return object;
                             })
-                            return object;
-                        })
-                        callback( KOObjects )
+                            callback( KOObjects )
+                        }
                     })
                     .fail( function(e) { console.log("error", e) })                
                         

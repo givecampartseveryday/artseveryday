@@ -8,7 +8,18 @@
 <script>
         $(function(){
             //$.currentNode; 
-            //debugger; 
+            var DonorKey = $.QueryString('DonorKey')
+             $.Hash.access_token = $.QueryString('access_token')
+            var lastName = DonorKey.split('--')[0].replace(/\_/g, ' ') || ''
+            var firstName = DonorKey.split('--')[1].replace(/\_/g, ' ') || ''
+            var middle = DonorKey.split('--')[2].replace(/\_/g, ' ') || ''
+
+            var sql = " WHERE "
+            sql += " 'Donor Last Name' = '{0}'".format( lastName )
+            sql += " AND 'Donor First Name' = '{0}'".format( firstName )
+            sql += " AND 'Donor MI' = '{0}'".format( middle )
+
+            // debugger; 
             $.extend( 
                 $.Form
                 , {
@@ -69,11 +80,18 @@
                 $.Form.Navigate.last(null)
             }
             //$.Auth(function(){ 
+            //debugger; 
                 $.FusionGetTable( 
                     $.Table.Key
                     , function(data){ 
-                        $.Form.KOSetup(data, function(){$.Form.SetupSingle()}) 
+                        var afterSetup = function(){
+                            
+                            $.Form.Setup()
+                        }
+                    
+                        $.Form.KOSetup(data, function(){ }) 
                     } 
+                    , sql
                 )
             //});
         });
@@ -87,39 +105,57 @@
 
 <div id='DonorsList' class='col-lg-12'>
         <!-- <a href="list.php">List View</a> &nbsp; &nbsp; -->
-        <a class="openInDrive" href="#">Open in Google Drive</a>
 
       <div  class='donorsEditor Editor Binder' data-bind="foreach: { data:  $.Form.KO.Model.items }">
-      <fieldset class="col-lg-10 editgrid" data-bind=" attr: {'id': 'fieldset_' + rowid}" style="display:none">     
+      <fieldset class="col-lg-10 editgrid" data-bind=" attr: {'id': 'fieldset_' + rowid}">     
             <legend data-bind='html: donorLastName'> </legend>
 
         <button data-bind='click: $root.removeItem'>Delete</button><br/>
 
         <table>
-             <tr><th>   <label for="rowid" class="control-label">id</label>                                          </th><td>  <input class="form-control col-lg-6" data-bind='value: rowid' />                       </td></tr>
-             <tr><th>   <label for="donorID" class="control-label">Donor ID</label>                              </th><td>  <input class="form-control col-lg-6" data-bind='value: donorID' />                   </td></tr>
-             <tr><th>   <label for="donorType" class="control-label">Donor Type</label>                                </th><td>  <input class="form-control col-lg-6" data-bind='value: donorType' />                    </td></tr>
-             <tr><th>   <label for="donorFirstName" class="control-label">Donor First Name</label>                      </th><td>  <input class="form-control col-lg-6" data-bind='value: donorFirstName' />               </td></tr>
-             <tr><th>   <label for="donorLastName" class="control-label">Donor Last Name</label>                                       </th><td>  <input class="form-control col-lg-6" data-bind='value: donorLastName' />                       </td></tr>
-             <tr><th>   <label for="donorOrganization" class="control-label">Donor Organization</label>                       </th><td>  <input class="form-control col-lg-6" data-bind='value: donorOrganization' />                </td></tr>
-             <tr><th>   <label for="typeOfGift" class="control-label">Type of Gift</label>                       </th><td>  <input class="form-control col-lg-6" data-bind='value: typeOfGift' />                </td></tr>
-             <tr><th>   <label for="askAmount" class="control-label">Amount Requested</label>                                         </th><td>  <input class="form-control col-lg-6" data-bind='value: askAmount' />                        </td></tr>
-             <tr><th>   <label for="pledgeRecieved" class="control-label">Date Pledge Recieved</label>                                       </th><td>  <input class="form-control col-lg-6" data-bind='value: pledgeRecieved' />                       </td></tr>
-             <tr><th>   <label for="pledgeAmount" class="control-label">Pledge Amount</label>                                       </th><td>  <input class="form-control col-lg-6" data-bind='value: pledgeAmount' />                       </td></tr>
-             <tr><th>   <label for="checkAmount" class="control-label">Check Amount</label>                                           </th><td>  <input class="form-control col-lg-6" data-bind='value: checkAmount' />                         </td></tr>
-             <tr><th>   <label for="checkReceived" class="control-label">Date Check Received</label>                       </th><td>  <input class="form-control col-lg-6" data-bind='value: checkReceived' />                  </td></tr>
-             <tr><th>   <label for="checkNumber" class="control-label">Check Number</label>                          </th><td>  <input class="form-control col-lg-6" data-bind='value: checkNumber' />                     </td></tr>
-             <tr><th>   <label for="completeCertificateReceived" class="control-label">Complete Certificate Received</label>                 </th><td>  <input class="form-control col-lg-6" data-bind='value: completeCertificateReceived' />                   
-                <input title="Check for yes" type="checkbox" class="form-control col-lg-6" data-bind='checked: completeCertificateReceived' />
-             </td></tr>
-             <tr><th>   <label for="acknowledgementLetterSendDate" class="control-label">Date Acknowledgement Letter sent</label>   </th><td>  <input class="form-control col-lg-6" data-bind='value: acknowledgementLetterSendDate' />      </td></tr>
-      
-            <tr><th>   <label for="dhcdCertificationSendDate" class="control-label">DHCD Certification SendDate</label>                          </th><td>  <input class="form-control col-lg-6" data-bind='value: dhcdCertificationSendDate' />                     </td></tr>
-             <tr><th>   <label for="dateOnCheck" class="control-label">Date on Check</label>                 </th><td>  <input class="form-control col-lg-6" data-bind='value: dateOnCheck' />                   </td></tr>
-             <tr><th>   <label for="fiscalYear" class="control-label">Fiscal Year</label>   </th><td>  <input class="form-control col-lg-6" data-bind='value: fiscalYear' />      </td></tr>
-             <tr><th>   <label for="isTaxCredit" class="control-label">Is Tax Credit</label>   </th><td>  <input class="form-control col-lg-6" data-bind='value: isTaxCredit' />      
-             <input title="Check for yes" type="checkbox" class="form-control col-lg-6" data-bind='checked: isTaxCredit' />
-             </td></tr>
+            <tr>                                                                                                                 
+            <th><label for="rowid" class="control-label">id</label>                                                           </th>
+            <th><label for="donorID" class="control-label">Donor ID</label>                                                   </th>
+            <th><label for="donorType" class="control-label">Donor Type</label>                                               </th>
+            <th><label for="donorFirstName" class="control-label">Donor First Name</label>                                    </th>
+            <th><label for="donorLastName" class="control-label">Donor Last Name</label>                                      </th>
+            <th><label for="donorOrganization" class="control-label">Donor Organization</label>                               </th>
+            <th><label for="typeOfGift" class="control-label">Type of Gift</label>                                            </th>
+            <th><label for="askAmount" class="control-label">Amount Requested</label>                                         </th>
+            <th><label for="pledgeRecieved" class="control-label">Date Pledge Recieved</label>                                </th>
+            <th><label for="pledgeAmount" class="control-label">Pledge Amount</label>                                         </th>
+            <th><label for="checkAmount" class="control-label">Check Amount</label>                                           </th>
+            <th><label for="checkReceived" class="control-label">Date Check Received</label>                                  </th>
+            <th><label for="checkNumber" class="control-label">Check Number</label>                                           </th>
+            <th><label for="completeCertificateReceived" class="control-label">Complete Certificate Received</label>          </th>
+            <th><label for="acknowledgementLetterSendDate" class="control-label">Date Acknowledgement Letter sent</label>     </th>
+            <th><label for="dhcdCertificationSendDate" class="control-label">DHCD Certification SendDate</label>              </th> 
+            <th><label for="dateOnCheck" class="control-label">Date on Check</label>                                          </th>
+            <th><label for="fiscalYear" class="control-label">Fiscal Year</label>                                             </th>
+            <th><label for="isTaxCredit" class="control-label">Is Tax Credit</label>                                          </th>
+            </tr>
+            
+            <tr>           
+             <td><input class="form-control col-lg-6" data-bind='value: rowid' />                                                                                                                                                          </td>
+             <td><input class="form-control col-lg-6" data-bind='value: donorID' />                                                                                                                                                        </td>
+             <td><input class="form-control col-lg-6" data-bind='value: donorType' />                                                                                                                                                      </td>
+             <td><input class="form-control col-lg-6" data-bind='value: donorFirstName' />                                                                                                                                                 </td>
+             <td><input class="form-control col-lg-6" data-bind='value: donorLastName' />                                                                                                                                                  </td>
+             <td><input class="form-control col-lg-6" data-bind='value: donorOrganization' />                                                                                                                                              </td>
+             <td><input class="form-control col-lg-6" data-bind='value: typeOfGift' />                                                                                                                                                     </td>
+             <td><input class="form-control col-lg-6" data-bind='value: askAmount' />                                                                                                                                                      </td>
+             <td><input class="form-control col-lg-6" data-bind='value: pledgeRecieved' />                                                                                                                                                 </td>
+             <td><input class="form-control col-lg-6" data-bind='value: pledgeAmount' />                                                                                                                                                   </td>
+             <td><input class="form-control col-lg-6" data-bind='value: checkAmount' />                                                                                                                                                    </td>
+             <td><input class="form-control col-lg-6" data-bind='value: checkReceived' />                                                                                                                                                  </td>
+             <td><input class="form-control col-lg-6" data-bind='value: checkNumber' />                                                                                                                                                    </td>
+             <td><input class="form-control col-lg-6" data-bind='value: completeCertificateReceived' /><input title="Check for yes" type="checkbox" class="form-control col-lg-6" data-bind='checked: completeCertificateReceived' />      </td>
+             <td><input class="form-control col-lg-6" data-bind='value: acknowledgementLetterSendDate' />                                                                                                                                  </td>
+             <td><input class="form-control col-lg-6" data-bind='value: dhcdCertificationSendDate' />                                                                                                                                      </td>
+             <td><input class="form-control col-lg-6" data-bind='value: dateOnCheck' />                                                                                                                                                    </td>
+             <td><input class="form-control col-lg-6" data-bind='value: fiscalYear' />                                                                                                                                                     </td>
+             <td><input class="form-control col-lg-6" data-bind='value: isTaxCredit' /><input title="Check for yes" type="checkbox" class="form-control col-lg-6" data-bind='checked: isTaxCredit' />                                      </td>
+            </tr>
       
       
       </table>
@@ -153,7 +189,6 @@
     </div><!-- DonorsList -->
     </div><!-- container -->
     
-<?php include '../_footer.html'; ?>
 </body>
 
 </html>

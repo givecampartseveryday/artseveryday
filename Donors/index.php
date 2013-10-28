@@ -16,7 +16,8 @@
                 //debugger; 
                 $.Form.$currentNode
                 var donorKey = $('.donorKey', $.Form.$currentNode).val()
-                $('.donationsList').attr('src', 'donations.php#DonorKey=' + donorKey +'&access_token=' +  $.Hash.access_token  )
+                //alert( 'donations.php?DonorKey=' + donorKey +'&access_token=' +  $.Hash.access_token)
+                $('.donationsList').attr('src', 'donations.php?DonorKey=' + donorKey +'&access_token=' +  $.Hash.access_token  )
             }            
             
             $.extend( 
@@ -93,7 +94,7 @@
                             }) 
                             $.FusionGetTable( $.AEDtables['Donations'], function(data){
                                 $.each( data, function(i, row){
-                                    var donorKey = row['Donor Last Name'].noSpace() + '-'+ row['Donor First Name'].noSpace() + '-'+ row['Donor MI'].noSpace() 
+                                    var donorKey = row['Donor Last Name'].noSpace() + '--'+ row['Donor First Name'].noSpace() + '--'+ row['Donor MI'].noSpace() 
                                     //console.log('Get', donorKey)
                                     $('.'+donorKey).show()
                                 })
@@ -105,7 +106,7 @@
                                 var header = ['Donor Last Name', 'Donor First Name', 'Check Amount', 'Check Received'] 
                                 var table = $.AEDtables['Donations']
                             
-                                var donorNameArray= donorKey.split('-')
+                                var donorNameArray= donorKey.split('--')
                                 var spreadSheetTitle= 'AED Donations by Donor'
                                 var workSheetTitle= 'Donor {0} {1}'.format(donorNameArray[0], donorNameArray[1])
                             
@@ -125,7 +126,7 @@
             $.FusionGetTable( $.AEDtables['Donors'], function(data){
                 $.each( data, function(i, row){
                 
-                    var donorKey = row['Last Name'].noSpace() + '-'+ row['First Name'].noSpace() + '-'+ row['MI'].noSpace() 
+                    var donorKey = row['Last Name'].noSpace() + '--'+ row['First Name'].noSpace() + '--'+ row['MI'].noSpace() 
                     var donorName = row['Last Name']+ ', ' + row['First Name']
                     var opt = '<option value="'+ donorKey+'">' + donorName + '</option>'
         
@@ -191,7 +192,7 @@
 
         <button data-bind='click: $root.removeItem'>Delete</button> *The donotions report button is only display if the donor has entries in donations. 
         
-        <input type="hidden" class="donorKey" data-bind="value: lastName.noSpace() + '-' + firstName.noSpace() + '-' + mI.noSpace() " />
+        <input type="hidden" class="donorKey" data-bind="value: lastName.noSpace() + '--' + firstName.noSpace() + '--' + mI.noSpace() " />
         <a class="byDonor" href="#">Make Donor Report</a><br/>
         
         <table>
