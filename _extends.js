@@ -47,8 +47,9 @@ var jQuery = jQuery || {};
                 $.Form.KO.AfterAddItem()
             }
             , removeItem: function(item){
-                console.log(item);
                 item.dirty = 'delete';
+                ($.Form.KO.Model.items).valueHasMutated();
+                $('.dirty').val('delete');
             }
             
             , save: function() {
@@ -196,6 +197,7 @@ var jQuery = jQuery || {};
                         items
                         , function( item ) {
                             $.Form.KO.Model.Item = $.extend( {}, $.Form.KO.Model.prototypical )
+                            
                             $.Form.KO.Model.Item.dirty = false
                             for( var propName in item ){
                                 $.Form.KO.Model.prototypical[ $.Table.Map( propName ) ] = null

@@ -3,13 +3,9 @@
 <?php include '../_scripts.html'; ?>
 <script src="../_extends.js"></script>
 <script src="../_authenticate.js"></script>
-<script src="../_tables.js"></script>
+<script src="../_stub.php"></script>
 <link href="../style.css" rel="stylesheet" type="text/css" />
 <script>
-    function setAsDeleted(name) {
-        name += ' will be deleted upon "Save"';
-    }
-
       $(function(){
             //$.currentNode; 
             //debugger; 
@@ -98,7 +94,7 @@
         });
         
 </script>
-    
+
 </head>
 <body>
 <?php include '../_header.html'; ?>
@@ -111,10 +107,15 @@
         <a class="openInDrive" href="#">Open in Google Drive</a>
 
       <div  class='donorsEditor Editor Binder' data-bind="foreach: { data:  $.Form.KO.Model.items }">
+        
       <fieldset class="col-lg-10 editgrid" data-bind=" attr: {'id': 'fieldset_' + rowid}" style="display:none">     
             <legend data-bind='html: schoolname'> </legend>
-
+            
             <button data-bind='click: $root.removeItem'>Delete</button><br/>
+
+            <div id=deleteBanner class='alert alert-error' data-bind='visible: $.Form.KO.Model.items()[$index()].dirty === "delete"'>
+                 This entry is marked for deletion. Press "Save" to delete permanently. Reload the page to undo.
+            </div>
 
 <table>
          <tr><th>   <label for="schoolname" class="control-label">School Name</label>                          </th><td>  <input size="60" class="form-control col-lg-6" data-bind='value: schoolname' />                       </td></tr>
@@ -146,7 +147,7 @@
 
             <input type="text" class="dirty" data-bind='value: dirty' />
       </fieldset>
-
+        
       </div><!-- donorsEditor databinder -->
 
     <br />      
